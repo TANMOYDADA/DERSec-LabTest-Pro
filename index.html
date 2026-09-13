@@ -1,998 +1,848 @@
 <!DOCTYPE html>
+
 <html lang="en-US">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>DERSec LabTest Pro — Automated DER Certification Testing</title>
-  <meta name="description" content="DERSec LabTest Pro automates DER certification and interoperability testing across IEEE 1547.1, UL 1741 SB, DER protocols, laboratory hardware, data capture, and pass/fail assessment." />
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<title>DER Certification Testing Software | DERSec LabTest Pro</title>
+<meta content="DERSec LabTest Pro automates IEEE 1547.1 and UL 1741 SB DER certification testing, laboratory hardware control, interoperability validation, measurement capture, and traceable pass/fail assessment." name="description"/>
+<link href="https://dersec.io/wp-content/uploads/2026/03/Favicon.png" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#08101d;--bg2:#0c1526;--panel:#0e192b;--panel2:#111f35;--text:#f8fafc;--muted:#94a3b8;--line:rgba(148,163,184,.12);--blue:#3b82f6;--blue2:#60a5fa;--teal:#2dd4bf;--max:1200px;--shadow:0 24px 70px rgba(0,0,0,.35)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:76px}body{margin:0;background:radial-gradient(circle at 50% -10%,rgba(59,130,246,.14),transparent 35%),var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.55}a{color:inherit;text-decoration:none}button{font:inherit}.container{width:min(var(--max),calc(100% - 40px));margin:auto}h1,h2,h3,h4,.eyebrow,.btn,.tab-btn,.metric,.label{font-family:Outfit,system-ui,sans-serif}h1{font-size:clamp(2.6rem,5.4vw,4.65rem);line-height:.98;letter-spacing:-.055em;margin:0}h2{font-size:clamp(1.7rem,3.2vw,2.65rem);line-height:1.03;letter-spacing:-.04em;margin:0}h3{font-size:1rem;line-height:1.2;margin:0}p{margin:0;color:var(--muted)}.section{padding:54px 0;border-top:1px solid rgba(148,163,184,.07)}.section-head{max-width:780px;margin-bottom:22px}.section-head.center{margin-inline:auto;text-align:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 10px;margin-bottom:13px;border-radius:6px;background:rgba(37,99,235,.13);color:var(--blue2);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em}.eyebrow:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue);box-shadow:0 0 12px rgba(96,165,250,.7)}.gradient{background:linear-gradient(135deg,#fff,#60a5fa 60%,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
+header{position:sticky;top:0;z-index:100;background:rgba(8,16,29,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(148,163,184,.08)}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand img{width:216px;max-width:44vw}.nav-links{display:flex;align-items:center;gap:22px;font-family:Outfit;font-size:14px;color:#dbeafe}.nav-links a:hover{color:#fff}.nav-contact{padding:9px 18px;border:1px solid rgba(96,165,250,.3);border-radius:999px;background:rgba(37,99,235,.08)}
+.btn-wrap{display:inline-block;padding:2px;border-radius:999px;background:linear-gradient(135deg,#1e40af,#60a5fa)}.btn{height:46px;padding:0 23px;border-radius:999px;display:inline-flex;align-items:center;font-size:14px;font-weight:600;transition:.2s ease}.btn-primary{background:#121c30}.btn-secondary{background:#0d1728;color:#bfdbfe}.btn:hover{transform:translateY(-2px)}
+.hero{position:relative;overflow:hidden}.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:40px 40px;mask-image:linear-gradient(to bottom,black 40%,transparent 100%)}.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center;padding:56px 0 30px}.hero-sub{font-family:Outfit;font-size:clamp(1.02rem,1.65vw,1.24rem);color:#dbeafe;margin-top:18px;font-weight:500}.hero-copy{margin-top:13px;max-width:650px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.pill{font-size:11.5px;color:#cbd5e1;padding:7px 10px;border-radius:8px;border:1px solid rgba(96,165,250,.12);background:rgba(15,23,42,.56)}
+.hero-gallery{padding:12px;border-radius:18px;border:1px solid rgba(96,165,250,.17);background:#0b1424;box-shadow:var(--shadow)}.hero-images{display:grid;grid-template-columns:1fr 1fr;gap:10px}.photo-card{margin:0;border-radius:13px;overflow:hidden;border:1px solid rgba(96,165,250,.12);background:#0c1627}.photo{height:228px;background-size:cover;background-position:center;background-repeat:no-repeat}.photo-card figcaption{padding:9px 11px;color:#cbd5e1;font-family:Outfit;font-size:10.5px;font-weight:600;letter-spacing:.04em}.hero-strip{display:flex;align-items:center;gap:8px;overflow-x:auto;padding:11px 2px 0;scrollbar-width:none}.hero-strip::-webkit-scrollbar{display:none}.chip{white-space:nowrap;padding:7px 9px;border-radius:8px;border:1px solid rgba(96,165,250,.11);font-size:10.5px;color:#cbd5e1;background:#0f1a2d}.chip.core{color:#bfdbfe;background:rgba(37,99,235,.12);border-color:rgba(96,165,250,.25);font-weight:600}.arrow{color:#60a5fa}
+.insight{margin:0 auto 42px;padding:19px;border-radius:16px;border:1px solid rgba(96,165,250,.15);background:linear-gradient(145deg,rgba(15,23,42,.78),rgba(8,16,29,.8))}.insight-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:16px}.insight h2{font-size:clamp(1.4rem,2.2vw,1.9rem)}.insight p{margin-top:8px;font-size:13px}.compare{display:grid;grid-template-columns:1fr 1fr;gap:9px}.compare-card{padding:13px;border-radius:11px;background:rgba(10,18,32,.56);border:1px solid rgba(148,163,184,.1)}.compare-card.highlight{background:rgba(37,99,235,.09);border-color:rgba(96,165,250,.23)}.compare-card h3{font-size:.9rem}.mini-list{display:grid;gap:5px;margin-top:8px}.mini-list span{font-size:10.5px;color:#cbd5e1;padding:5px 7px;border-radius:6px;background:rgba(148,163,184,.05)}.verification{display:flex;align-items:center;gap:8px;overflow-x:auto;padding-top:13px;margin-top:13px;border-top:1px solid rgba(148,163,184,.08);scrollbar-width:none}.verification::-webkit-scrollbar{display:none}.vstep{white-space:nowrap;padding:7px 9px;border-radius:7px;background:#0f1a2d;border:1px solid rgba(96,165,250,.1);font-family:Outfit;font-size:11px;font-weight:600}
+.tabs{border:1px solid #dbe6f3;border-radius:17px;background:#fff;overflow:hidden;box-shadow:0 18px 45px rgba(15,23,42,.10)}.tabbar{display:flex;gap:6px;overflow-x:auto;padding:9px;border-bottom:1px solid #e5edf7;background:#f8fbff;scrollbar-width:none}.tabbar::-webkit-scrollbar{display:none}.tab-btn{white-space:nowrap;border:0;color:#475569;background:transparent;padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer}.tab-btn[aria-selected="true"]{color:#0f172a;background:#e8f1ff;box-shadow:inset 0 0 0 1px #bfdbfe}.tab-panel{padding:19px;color:#0f172a}.tab-panel[hidden]{display:none}.tab-panel h3{color:#0f172a}.tab-panel p{color:#475569}.how-grid{display:grid;grid-template-columns:.68fr 1.32fr;gap:18px;align-items:stretch}.tab-copy{padding:8px 4px;display:flex;flex-direction:column;justify-content:center}.label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;font-weight:600;margin-bottom:6px}.tab-copy p{margin-top:8px}.image-stack{border-radius:13px;overflow:hidden;border:1px solid #dbe6f3;background:#fff}.tab-image{height:238px;background-size:cover;background-position:center;background-repeat:no-repeat}.image-caption{padding:8px 11px;font-family:Outfit;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#334155;border-top:1px solid #e5edf7;background:#f8fbff}.diagram{padding:12px;border-top:1px solid #e5edf7;background:#fff}.flow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}.flow span:not(.arrow){padding:8px 10px;border-radius:8px;background:#f8fbff;border:1px solid #dbe6f3;font-size:11px;color:#0f172a}.flow .active{background:#e8f1ff;border-color:#bfdbfe}
+.cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.card{padding:16px;border-radius:12px;border:1px solid #dbe6f3;background:#fff;box-shadow:0 10px 24px rgba(15,23,42,.05)}.card-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;background:#eff6ff;border:1px solid #dbeafe;color:#2563eb;font-family:Outfit;font-size:11px;font-weight:700;margin-bottom:10px}.card h3{font-size:.92rem;color:#0f172a}.card p{font-size:11.5px;margin-top:7px;color:#475569}.threat-tag{display:inline-block;margin-top:9px;font-family:Outfit;font-size:9px;letter-spacing:.06em;color:#2563eb}.cards.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.option-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.option{padding:16px;border-radius:12px;border:1px solid #dbe6f3;background:#fff;box-shadow:0 10px 24px rgba(15,23,42,.05)}.option h3{font-size:.92rem;color:#0f172a}.option p{font-size:11.5px;margin-top:6px;color:#475569}.env-big{font-family:Outfit;font-size:2rem;color:rgba(59,130,246,.25);font-weight:700;line-height:1;margin-bottom:10px}.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:13px;border:1px solid rgba(96,165,250,.16);border-radius:13px;overflow:hidden;background:rgba(96,165,250,.12);box-shadow:0 14px 34px rgba(0,0,0,.18)}.trust-item{padding:17px 15px;text-align:center;background:#0c1525}.metric{font-size:1.65rem;font-weight:700;background:linear-gradient(135deg,#60a5fa,#8b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent}.trust-item strong{display:block;font-family:Outfit;font-size:11.5px;margin-top:2px;color:#f8fafc}.trust-item span{display:block;color:#94a3b8;font-size:10px;margin-top:3px}.cta{margin-top:13px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding:22px 24px;border-radius:15px;border:1px solid rgba(96,165,250,.18);background:radial-gradient(circle at 10% 0%,rgba(37,99,235,.18),transparent 48%),linear-gradient(145deg,#0f172a,#0a0f1e);box-shadow:0 20px 55px rgba(0,0,0,.24)}.cta h2{font-size:clamp(1.4rem,2.2vw,1.95rem);color:#f8fafc}.cta p{margin-top:6px;font-size:12.5px;max-width:700px;color:#94a3b8}.cta .eyebrow{background:rgba(37,99,235,.14);color:#60a5fa}.cta .btn-primary,.cta .btn-secondary{background:#111b2e;color:#fff}.cta .btn-wrap{background:linear-gradient(135deg,#1e40af,#3b82f6,#60a5fa)}
+/* ===== DERSec production footer, based on supplied Products page footer ===== */
+#site-footer{padding:54px 0 0;border-top:1px solid rgba(148,163,184,.08);background:#080e1b;color:#f8fafc}
+#site-footer .footer-inner{width:min(var(--max),calc(100% - 40px));margin:0 auto}
+#site-footer .footer-grid{display:grid;grid-template-columns:minmax(340px,1.55fr) repeat(3,minmax(150px,.8fr));gap:48px;align-items:start;padding-bottom:42px}
+#site-footer .footer-brand{min-width:0}
+#site-footer .footer-brand>a{display:inline-flex;align-items:center}
+#site-footer .footer-brand img{display:block;width:296px;max-width:100%;height:auto}
+#site-footer .footer-brand p{max-width:470px;margin:20px 0 0;color:#94a3b8;font-family:Inter,system-ui,sans-serif;font-size:13px;line-height:1.7}
+#site-footer .footer-social{display:flex;align-items:center;gap:10px;margin-top:22px}
+#site-footer .footer-social a{width:39px;height:39px;display:grid;place-items:center;border:1px solid rgba(148,163,184,.16);border-radius:9px;background:rgba(15,23,42,.5);color:#cbd5e1;transition:all .2s ease}
+#site-footer .footer-social a:hover{border-color:#2563eb;background:rgba(37,99,235,.15);color:#60a5fa}
+#site-footer .footer-social svg{width:17px;height:17px;fill:currentColor}
+#site-footer .footer-col h6{margin:2px 0 15px;color:#f8fafc;font-family:Outfit,system-ui,sans-serif;font-size:14px;font-weight:600;line-height:1.2}
+#site-footer .footer-links{display:grid;gap:0}
+#site-footer .footer-links a{display:block;padding:5px 0;color:#94a3b8;font-family:Inter,system-ui,sans-serif;font-size:12.5px;line-height:1.55;transition:color .2s ease}
+#site-footer .footer-links a:hover{color:#60a5fa}
+#site-footer .footer-bottom{border-top:1px solid rgba(148,163,184,.08);background:#070c17}
+#site-footer .footer-bottom-inner{width:min(var(--max),calc(100% - 40px));margin:0 auto;padding:18px 0 21px}
+#site-footer .copyright{margin:0;color:#64748b;font-family:Inter,system-ui,sans-serif;font-size:11px;line-height:1.5}
+@media(max-width:1050px){.hero-inner,.how-grid,.insight-grid{grid-template-columns:1fr}.cards{grid-template-columns:repeat(3,1fr)}.option-grid{grid-template-columns:repeat(2,1fr)}#site-footer .footer-grid{grid-template-columns:1.25fr 1fr 1fr;gap:30px}#site-footer .footer-brand{grid-column:1/-1}.nav-links a:not(.nav-contact){display:none}.cta{grid-template-columns:1fr}}
+@media(max-width:700px){.container{width:min(var(--max),calc(100% - 24px))}.section{padding:42px 0}.hero-inner{padding:45px 0 24px;gap:28px}.hero-images{grid-template-columns:1fr}.photo{height:205px}.compare{grid-template-columns:1fr}.cards,.cards.three,.option-grid,.trust{grid-template-columns:1fr}.tab-image{height:190px}.flow{justify-content:flex-start}#site-footer .footer-grid{grid-template-columns:1fr;gap:26px}#site-footer .footer-brand{grid-column:auto}#site-footer .footer-brand img{width:250px}}
 
-  <link rel="icon" href="https://dersec.io/wp-content/uploads/2026/03/Favicon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+/* REAL-PHOTO IMAGE SET: unique images, no generated artwork */
 
-  <style>
-    :root{
-      --bg:#0a0f1e;
-      --bg2:#0c1323;
-      --panel:#0f172a;
-      --panel2:#111c31;
-      --panel3:#0c1425;
-      --text:#f8fafc;
-      --muted:#94a3b8;
-      --muted2:#64748b;
-      --line:rgba(148,163,184,.12);
-      --blue:#2563eb;
-      --blue2:#3b82f6;
-      --blue3:#60a5fa;
-      --blue4:#93c5fd;
-      --purple:#a78bfa;
-      --cyan:#67e8f9;
-      --green:#34d399;
-      --amber:#fbbf24;
-      --red:#f87171;
-      --max:1200px;
-      --shadow:0 22px 70px rgba(0,0,0,.42),0 0 46px rgba(37,99,235,.06);
-    }
+/* DERSec reference navigation */
+.ds-header{position:sticky;top:0;z-index:1000;background:#08101d;border-bottom:1px solid rgba(148,163,184,.06);backdrop-filter:blur(14px)}
+.ds-nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+.ds-brand{display:flex;align-items:center;flex:0 0 auto}.ds-brand img{display:block;width:296px;max-width:32vw;height:auto}
+.ds-desktop-nav{height:100%;display:flex;align-items:center;gap:18px;margin-left:auto;font-family:Outfit,Inter,sans-serif}
+.ds-nav-item{height:100%;display:flex;align-items:center;position:relative}
+.ds-nav-trigger{position:relative;height:100%;padding:0 16px;border:0;background:transparent;color:#e2e8f0;font-family:Outfit,Inter,sans-serif;font-size:14px;font-weight:400;cursor:pointer;letter-spacing:.005em}
+.ds-nav-item:after{content:"";position:absolute;left:14px;right:14px;bottom:0;height:3px;background:#3978f6;transform:scaleX(0);transform-origin:center;transition:transform .18s ease}
+.ds-nav-item:hover:after,.ds-nav-item:focus-within:after{transform:scaleX(1)}
+.ds-nav-trigger:hover,.ds-nav-trigger:focus-visible{color:#fff;outline:none}
+.ds-contact{display:flex;align-items:center;justify-content:center;min-width:116px;height:70px;margin-left:8px;padding:0 24px;border-radius:999px;border:1px solid rgba(96,165,250,.30);background:rgba(37,99,235,.08);color:#e2e8f0;font-family:Outfit,Inter,sans-serif;font-size:14px;font-weight:500;transition:.25s ease}
+.ds-contact:hover{background:#2563eb;border-color:#2563eb;color:#fff;box-shadow:0 4px 16px rgba(37,99,235,.35);transform:translateY(-1px)}
+.ds-mega{position:absolute;top:100%;left:0;display:none;padding:48px 24px 24px;border:1px solid rgba(59,130,246,.30);border-radius:12px;background:rgba(15,23,42,.98);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 20px 60px rgba(0,0,0,.50),0 0 40px rgba(59,130,246,.15);color:#e8eef8;z-index:20}
+.ds-mega:before{content:"";position:absolute;left:-1px;top:-5px;width:44%;height:4px;background:#3978f6;border-radius:4px 4px 0 0}
+.ds-has-menu:hover>.ds-mega,.ds-has-menu:focus-within>.ds-mega{display:grid}
+.ds-mega-products{width:520px;grid-template-columns:1.12fr .88fr;gap:40px}
+.ds-mega-solutions{width:520px;grid-template-columns:1fr 1fr;gap:40px}
+.ds-mega-small{width:220px;grid-template-columns:1fr;gap:0}
+.ds-mega-col{min-width:0}.ds-driver-col{padding-top:1px}
+.ds-menu-heading{margin:14px 0 10px;color:#f8fafc;font-family:Outfit,sans-serif;font-size:12px;font-weight:500;letter-spacing:.085em;text-transform:uppercase}
+.ds-mega-col>.ds-menu-heading:first-child{margin-top:0}
+.ds-menu-link{display:flex;align-items:center;gap:12px;min-height:38px;padding:8px 10px;border-radius:8px;color:#fff;font-size:14px;line-height:1.25;transition:background .16s ease,color .16s ease,transform .16s ease}
+.ds-menu-link:hover,.ds-menu-link:focus-visible{color:#60a5fa;background:rgba(59,130,246,.10);transform:none;outline:none}
+.ds-menu-primary{margin-bottom:4px}
+.ds-mi{width:18px;height:18px;flex:0 0 18px;color:#cbd5e1}
+.ds-menu-link:hover .ds-mi{color:#6ba4ff}
+.ds-mobile-toggle,.ds-mobile-menu{display:none}
+.ds-nav-item.ds-has-menu::before{content:"";position:absolute;left:-10px;right:-10px;top:100%;height:12px;background:transparent;pointer-events:auto}
+.ds-nav-item:nth-child(3)>.ds-mega,.ds-nav-item:nth-child(4)>.ds-mega{left:auto;right:0}
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:88px}
-    body{
-      margin:0;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 48% -8%,rgba(37,99,235,.14),transparent 30%),
-        radial-gradient(circle at 92% 8%,rgba(167,139,250,.07),transparent 22%),
-        var(--bg);
-      font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-      line-height:1.6;
-      -webkit-font-smoothing:antialiased;
-    }
-    a{color:inherit;text-decoration:none}
-    img{display:block;max-width:100%}
-    h1,h2,h3,h4,.eyebrow,.btn,.nav-links,.metric,.code-label{
-      font-family:'Outfit',system-ui,sans-serif;
-    }
-    h1,h2,h3,h4{margin:0;line-height:1.08}
-    h1{font-size:clamp(3.1rem,6.8vw,6.05rem);letter-spacing:-.055em;font-weight:700}
-    h2{font-size:clamp(2.1rem,4.3vw,3.65rem);letter-spacing:-.04em;font-weight:700}
-    h3{font-size:1.2rem;font-weight:600}
-    p{margin:0;color:var(--muted)}
-    .container{width:min(var(--max),calc(100% - 40px));margin:auto}
-    .section{padding:92px 0;border-top:1px solid rgba(148,163,184,.07)}
-    .section.alt{background:linear-gradient(180deg,rgba(15,23,42,.30),rgba(10,15,30,0))}
-    .section-head{max-width:830px;margin-bottom:44px}
-    .section-head.center{text-align:center;margin-left:auto;margin-right:auto}
-    .section-head p{margin-top:14px;font-size:1.02rem}
-    .gradient-text{
-      background:linear-gradient(135deg,#f8fafc 0%,#60a5fa 56%,#a78bfa 100%);
-      -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent
-    }
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:5px 10px;margin-bottom:15px;border-radius:6px;
-      background:rgba(37,99,235,.12);color:var(--blue3);
-      font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.085em
-    }
-    .eyebrow::before{
-      content:"";width:6px;height:6px;border-radius:50%;
-      background:var(--blue2);box-shadow:0 0 10px rgba(96,165,250,.7)
-    }
 
-    /* HEADER */
-    .site-header{
-      position:sticky;top:0;z-index:1000;
-      background:rgba(10,15,30,.88);
-      backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);
-      border-bottom:1px solid rgba(148,163,184,.08);
-    }
-    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-    .brand img{width:222px;max-width:44vw}
-    .nav-links{display:flex;align-items:center;gap:26px;font-size:14px;color:#e2e8f0}
-    .nav-links a{transition:.2s ease}
-    .nav-links a:hover{color:#fff}
-    .nav-contact{
-      padding:9px 23px;border:1px solid rgba(96,165,250,.30);
-      border-radius:50px;background:rgba(37,99,235,.08)
-    }
-    .nav-contact:hover{background:var(--blue);border-color:var(--blue);box-shadow:0 4px 16px rgba(37,99,235,.35)}
+@media(max-width:980px){
+  .ds-nav{height:72px}.ds-brand img{width:220px;max-width:60vw}.ds-desktop-nav{display:none}.ds-mobile-toggle{width:42px;height:42px;border:1px solid rgba(96,165,250,.25);border-radius:10px;background:#0e1930;display:grid;place-content:center;gap:4px;cursor:pointer}.ds-mobile-toggle span{display:block;width:20px;height:2px;background:#e5e7eb;border-radius:2px}.ds-mobile-menu{display:none;position:absolute;top:72px;left:0;right:0;padding:14px 20px 22px;border-top:1px solid rgba(148,163,184,.08);background:#0a1324;box-shadow:0 20px 40px rgba(0,0,0,.28)}.ds-mobile-menu.is-open{display:block}.ds-mobile-menu details{border-bottom:1px solid rgba(148,163,184,.1)}.ds-mobile-menu summary{padding:14px 0;color:#f8fafc;font-family:Outfit;font-size:15px;cursor:pointer}.ds-mobile-group{display:grid;padding:0 0 12px 14px}.ds-mobile-group a{padding:8px 0;color:#aebbd0;font-size:13px}.ds-mobile-group a:hover{color:#fff}.ds-mobile-contact{display:inline-flex;margin-top:16px;padding:10px 20px;border-radius:999px;border:1px solid rgba(72,137,232,.45);background:#101d35;color:#fff;font-family:Outfit;font-size:14px}
+}
 
-    /* BUTTONS */
-    .btn-wrap{
-      display:inline-block;padding:2px;border-radius:50px;
-      background:conic-gradient(from 0deg,#1e40af,#2563eb,#3b82f6,#60a5fa,#93c5fd,#a78bfa,#60a5fa,#3b82f6,#2563eb)
-    }
-    .btn{
-      min-height:46px;padding:0 24px;border-radius:48px;display:inline-flex;align-items:center;gap:9px;
-      font-size:14px;font-weight:500;transition:.25s ease
-    }
-    .btn-primary{background:#141b2e;color:#fff}
-    .btn-secondary{background:rgba(15,23,42,.94);color:var(--blue4)}
-    .btn:hover{transform:translateY(-2px)}
-    .btn-primary:hover{background:rgba(30,58,138,.95)}
-    .btn-secondary:hover{background:rgba(37,99,235,.20);color:#fff}
 
-    /* HERO */
-    .hero{
-      position:relative;min-height:800px;display:grid;align-items:center;overflow:hidden
-    }
-    .hero::before{
-      content:"";position:absolute;inset:0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
-      background-size:40px 40px;
-      mask-image:linear-gradient(to bottom,black 38%,transparent 100%);
-      -webkit-mask-image:linear-gradient(to bottom,black 38%,transparent 100%);
-      pointer-events:none
-    }
-    .hero-inner{
-      position:relative;z-index:2;display:grid;grid-template-columns:1.03fr .97fr;
-      gap:58px;align-items:center;padding:88px 0 76px
-    }
-    .hero-sub{
-      font-family:'Outfit';font-size:clamp(1.2rem,2.15vw,1.58rem);
-      color:#dbeafe;margin-top:22px;font-weight:500;max-width:720px
-    }
-    .hero-copy{margin-top:15px;max-width:680px;font-size:1rem}
-    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
-    .hero-pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
-    .pill{
-      padding:7px 10px;border-radius:8px;background:rgba(15,23,42,.56);
-      border:1px solid rgba(96,165,250,.13);color:#cbd5e1;font-size:12px
-    }
-    .hero-metrics{
-      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px;max-width:690px
-    }
-    .hero-metric{
-      padding:14px;border-radius:16px;background:linear-gradient(180deg,rgba(17,28,49,.90),rgba(12,18,34,.90));
-      border:1px solid rgba(96,165,250,.12)
-    }
-    .hero-metric strong{
-      display:block;font-family:'Outfit';font-size:1.32rem;
-      background:linear-gradient(135deg,#60a5fa,#a78bfa);
-      -webkit-background-clip:text;background-clip:text;color:transparent
-    }
-    .hero-metric span{font-size:11px;color:var(--blue4);text-transform:uppercase;letter-spacing:.06em}
-    .hero-metric p{font-size:12px;margin-top:3px;color:#cbd5e1}
 
-    /* HERO LAB VISUAL */
-    .lab-visual{
-      min-height:560px;position:relative;overflow:hidden;border-radius:22px;
-      border:1px solid rgba(96,165,250,.16);
-      background:
-        radial-gradient(circle at 50% 45%,rgba(59,130,246,.18),transparent 29%),
-        linear-gradient(145deg,#0a0f1e,#0f172a);
-      box-shadow:var(--shadow)
-    }
-    .lab-visual::before{
-      content:"";position:absolute;inset:0;
-      background-image:
-        linear-gradient(rgba(96,165,250,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(96,165,250,.035) 1px,transparent 1px);
-      background-size:30px 30px
-    }
-    .lab-core{
-      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-      width:176px;height:176px;border-radius:22px;display:grid;place-items:center;text-align:center;z-index:4;
-      background:radial-gradient(circle,rgba(37,99,235,.30),rgba(15,23,42,.98) 70%);
-      border:1px solid rgba(96,165,250,.34);box-shadow:0 0 0 32px rgba(59,130,246,.04),0 0 70px rgba(37,99,235,.22)
-    }
-    .lab-core strong{font-family:'Outfit';font-size:1.75rem}
-    .lab-core span{display:block;color:var(--blue4);font-size:11.5px;margin-top:5px}
-    .lab-node{
-      position:absolute;width:142px;padding:13px;border-radius:15px;z-index:3;
-      background:rgba(15,23,42,.92);border:1px solid rgba(96,165,250,.14);
-      box-shadow:0 10px 28px rgba(0,0,0,.24)
-    }
-    .lab-node b{display:block;font-size:12.5px;line-height:1.2}
-    .lab-node span{display:block;font-size:10.7px;color:#cbd5e1;margin-top:4px}
-    .ln1{left:20px;top:34px}.ln2{right:20px;top:34px}.ln3{left:20px;bottom:36px}.ln4{right:20px;bottom:36px}
-    .lab-line{position:absolute;height:1px;background:linear-gradient(90deg,transparent,#60a5fa,transparent);opacity:.62;transform-origin:left center}
-    .ll1{width:188px;left:132px;top:112px;transform:rotate(18deg)}
-    .ll2{width:188px;right:132px;top:112px;transform:rotate(-18deg)}
-    .ll3{width:185px;left:132px;bottom:118px;transform:rotate(-18deg)}
-    .ll4{width:185px;right:132px;bottom:118px;transform:rotate(18deg)}
-    .lab-status{
-      position:absolute;left:50%;top:20px;transform:translateX(-50%);z-index:5;
-      display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:88%
-    }
-    .status-chip{
-      padding:6px 9px;border-radius:999px;background:rgba(10,15,30,.80);
-      border:1px solid rgba(96,165,250,.13);font-size:10.5px;color:#dbeafe
-    }
-    .status-chip.ok{color:#a7f3d0;border-color:rgba(52,211,153,.18);background:rgba(52,211,153,.07)}
-    .result-panel{
-      position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:5;
-      width:76%;padding:13px 14px;border-radius:14px;background:rgba(10,15,30,.84);
-      border:1px solid rgba(96,165,250,.13);backdrop-filter:blur(12px)
-    }
-    .result-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
-    .result-top strong{font-size:12.5px}
-    .pass{color:#a7f3d0;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-    .progress{height:8px;border-radius:999px;background:rgba(148,163,184,.10);overflow:hidden;margin-top:9px}
-    .progress i{display:block;height:100%;width:82%;background:linear-gradient(90deg,#34d399,#60a5fa,#a78bfa);border-radius:999px}
+/* LABTEST PRO RECREATION, aligned to DERSec Sentry visual system */
+.hero-inner{padding:56px 0 30px}
+.hero-copy{max-width:690px}
+.hero-gallery{padding:12px}
+.lab-hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:10px}
+.lab-ui,.lab-map{position:relative;min-height:228px;border-radius:13px;overflow:hidden;border:1px solid rgba(96,165,250,.12);background:linear-gradient(145deg,#0d1728,#0a1322)}
+.lab-ui:before,.lab-map:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+.lab-ui-inner,.lab-map-inner{position:relative;z-index:1;padding:15px;height:100%}
+.ui-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.ui-title{font:600 12px Outfit,sans-serif;color:#f8fafc;letter-spacing:.02em}.ui-status{font:600 9px Outfit,sans-serif;color:#a7f3d0;padding:5px 7px;border:1px solid rgba(52,211,153,.24);background:rgba(52,211,153,.08);border-radius:999px}
+.test-seq{display:grid;gap:7px}.seq-row{display:grid;grid-template-columns:24px 1fr auto;gap:8px;align-items:center;padding:8px;border:1px solid rgba(96,165,250,.09);border-radius:8px;background:rgba(15,23,42,.66)}
+.seq-num{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:rgba(59,130,246,.12);color:#93c5fd;font:700 9px Outfit,sans-serif}.seq-name{font:500 10.5px Outfit,sans-serif;color:#dbeafe}.seq-state{font-size:9px;color:#94a3b8}.seq-state.done{color:#6ee7b7}.seq-state.live{color:#93c5fd}
+.mini-chart{height:50px;margin-top:10px;padding:8px;border:1px solid rgba(96,165,250,.08);border-radius:8px;background:rgba(8,16,29,.66);display:flex;align-items:flex-end;gap:5px}.mini-chart i{display:block;flex:1;border-radius:3px 3px 1px 1px;background:linear-gradient(180deg,#60a5fa,#2563eb);opacity:.75}.mini-chart i:nth-child(1){height:28%}.mini-chart i:nth-child(2){height:47%}.mini-chart i:nth-child(3){height:42%}.mini-chart i:nth-child(4){height:68%}.mini-chart i:nth-child(5){height:61%}.mini-chart i:nth-child(6){height:84%}.mini-chart i:nth-child(7){height:72%}.mini-chart i:nth-child(8){height:92%}.mini-chart i:nth-child(9){height:77%}.mini-chart i:nth-child(10){height:88%}
+.map-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:94px;height:94px;border-radius:18px;display:grid;place-items:center;text-align:center;background:radial-gradient(circle,rgba(37,99,235,.28),rgba(15,23,42,.96) 68%);border:1px solid rgba(96,165,250,.25);box-shadow:0 0 32px rgba(37,99,235,.16);font:700 13px Outfit,sans-serif;color:#fff}.map-core small{display:block;margin-top:2px;font:500 8px Inter,sans-serif;color:#93c5fd}
+.map-node{position:absolute;width:78px;padding:7px;border-radius:8px;border:1px solid rgba(96,165,250,.11);background:rgba(15,23,42,.82);text-align:center;font:600 8.5px Outfit,sans-serif;color:#cbd5e1}.mn1{left:10px;top:18px}.mn2{right:10px;top:18px}.mn3{left:10px;bottom:18px}.mn4{right:10px;bottom:18px}.map-line{position:absolute;height:1px;background:linear-gradient(90deg,transparent,#60a5fa,transparent);opacity:.7;transform-origin:left center}.ml1{width:72px;left:68px;top:62px;transform:rotate(19deg)}.ml2{width:72px;right:68px;top:62px;transform:rotate(-19deg)}.ml3{width:72px;left:68px;bottom:62px;transform:rotate(-19deg)}.ml4{width:72px;right:68px;bottom:62px;transform:rotate(19deg)}
+.hero-strip{padding-top:10px}.chip.pass{color:#a7f3d0;border-color:rgba(52,211,153,.2);background:rgba(52,211,153,.06)}
+.lab-tab-visual{border-radius:13px;overflow:hidden;border:1px solid #dbe6f3;background:#fff;min-height:238px}.lab-console{padding:14px;background:#f8fbff;border-bottom:1px solid #e5edf7}.console-bar{display:flex;justify-content:space-between;gap:8px;align-items:center;font:600 10px Outfit,sans-serif;color:#334155}.console-badge{padding:4px 7px;border-radius:999px;background:#e8f1ff;color:#2563eb}.console-body{padding:15px}.console-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.console-box{padding:12px;border:1px solid #dbe6f3;border-radius:10px;background:#fff}.console-box span{display:block;font:600 9px Outfit,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:#64748b}.console-box strong{display:block;margin-top:4px;font:700 12px Outfit,sans-serif;color:#0f172a}.console-line{margin-top:10px;height:8px;border-radius:999px;background:#e7eef8;overflow:hidden}.console-line i{display:block;height:100%;width:78%;background:linear-gradient(90deg,#2563eb,#60a5fa)}
+.hw-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}.hw-chip{padding:7px 9px;border-radius:8px;background:#f8fbff;border:1px solid #dbe6f3;color:#334155;font-size:10.5px}
+.coverage-panel{padding:0}.coverage-columns{display:grid;grid-template-columns:1fr 1fr;gap:10px}.coverage-box{padding:14px;border:1px solid #dbe6f3;border-radius:10px;background:#fff}.coverage-box h4{margin:0;color:#0f172a;font:600 12px Outfit,sans-serif}.coverage-box p{font-size:11px;color:#64748b;margin-top:5px}.checklist{display:grid;gap:6px;margin-top:10px}.checklist span{font-size:10.5px;color:#334155;padding:6px 8px;border-radius:7px;background:#f8fbff;border:1px solid #e5edf7}.checklist span:before{content:"✓";color:#2563eb;font-weight:700;margin-right:7px}
+.cards.five{grid-template-columns:repeat(5,minmax(0,1fr))}.card-icon svg{width:18px;height:18px}.card .subtag{display:inline-block;margin-top:9px;font:600 9px Outfit,sans-serif;color:#2563eb;letter-spacing:.05em;text-transform:uppercase}
+.solution-flow{display:flex;align-items:center;gap:8px;overflow-x:auto;margin-top:13px;padding-top:13px;border-top:1px solid rgba(148,163,184,.08);scrollbar-width:none}.solution-flow::-webkit-scrollbar{display:none}.solution-flow .vstep.active{background:rgba(37,99,235,.13);border-color:rgba(96,165,250,.26);color:#dbeafe}
+.trust-item .metric.word{font-size:1.12rem;line-height:1.15;letter-spacing:-.02em;padding-top:5px}
+.note{font-size:10px;color:#64748b;margin-top:7px}.cta .actions{margin-top:0;justify-content:flex-end}.cta p{max-width:720px}
 
-    /* PROBLEM */
-    .problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    .problem-card{
-      padding:28px;border-radius:18px;background:linear-gradient(180deg,rgba(17,28,49,.84),rgba(12,18,34,.84));
-      border:1px solid rgba(96,165,250,.11)
-    }
-    .problem-card p{font-size:13px;margin-top:8px}
-    .issue-list{display:grid;gap:11px;margin-top:18px}
-    .issue-item{
-      display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;
-      background:rgba(8,13,25,.52);border:1px solid rgba(96,165,250,.08)
-    }
-    .issue-icon{
-      width:30px;height:30px;display:grid;place-items:center;border-radius:10px;
-      background:rgba(248,113,113,.08);color:#fecaca;font-family:'Outfit';font-size:11px;flex:0 0 30px
-    }
-    .solution-card{
-      background:linear-gradient(145deg,rgba(37,99,235,.10),rgba(15,23,42,.82));
-      border-color:rgba(96,165,250,.24)
-    }
-    .solution-card .issue-icon{background:rgba(52,211,153,.08);color:#a7f3d0}
+/* REAL LAB PHOTOGRAPHY: independent references, not reused from the Sentry page */
+.real-photo-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:10px}
+.real-photo-card{position:relative;margin:0;border-radius:13px;overflow:hidden;border:1px solid rgba(96,165,250,.13);background:#07101f;min-height:278px}
+.real-photo-card.compact{min-height:238px}
+.real-photo-card img{display:block;width:100%;height:100%;min-height:278px;object-fit:cover;object-position:center}
+.real-photo-card.compact img{min-height:238px}
+.real-photo-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(3,8,18,.88) 100%);pointer-events:none}
+.real-photo-meta{position:absolute;z-index:2;left:14px;right:14px;bottom:12px;display:flex;justify-content:space-between;gap:16px;align-items:flex-end}.real-photo-meta>div{min-width:0;max-width:100%}
+.real-photo-meta strong{display:block;color:#fff;font:600 12px/1.35 Outfit,sans-serif;letter-spacing:.01em}
+.real-photo-meta span{display:block;margin-top:5px;color:#cbd5e1;font-size:10px;line-height:1.45;letter-spacing:0;max-width:58ch}
+.real-photo-source{flex:0 0 auto;padding:4px 7px;border-radius:999px;border:1px solid rgba(147,197,253,.2);background:rgba(8,16,29,.72);color:#bfdbfe!important;font:600 8.5px Outfit,sans-serif!important;white-space:nowrap}
+.real-tab-photo{height:238px;position:relative;overflow:hidden;background:#0b1424}
+.real-tab-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.real-tab-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(2,6,16,.74));pointer-events:none}
+.real-tab-caption{position:absolute;z-index:2;left:12px;right:12px;bottom:10px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.real-tab-caption>div{min-width:0;max-width:100%}.real-tab-caption strong{display:block;color:#fff;font:600 12px/1.35 Outfit,sans-serif;letter-spacing:.01em}.real-tab-caption span{display:block;margin-top:5px;color:#dbeafe;font-size:10px;line-height:1.45;letter-spacing:0;max-width:52ch}.real-tab-caption strong+span{margin-top:5px}
+.hardware-photo{margin:0;border-radius:11px;overflow:hidden;border:1px solid #dbe6f3;background:#fff}
+.hardware-photo img{display:block;width:100%;height:205px;object-fit:cover}
+.hardware-photo figcaption{padding:9px 11px;color:#475569;font-size:10px;line-height:1.35;background:#f8fbff;border-top:1px solid #e5edf7}
+.arch-photo-row{display:grid;grid-template-columns:1.2fr .8fr;gap:10px;margin:14px 0 16px}
+.arch-photo-row .real-photo-card{min-height:240px}.arch-photo-row .real-photo-card img{min-height:240px}
+@media(max-width:1050px){.real-photo-grid,.arch-photo-row{grid-template-columns:1fr}}
+@media(max-width:700px){.real-photo-card,.real-photo-card img{min-height:220px}.real-photo-card.compact,.real-photo-card.compact img,.real-tab-photo{min-height:205px;height:205px}}
 
-    /* DIFFERENTIATION */
-    .diff-band{
-      display:grid;grid-template-columns:1fr auto 1.15fr auto 1fr;gap:16px;align-items:center;
-      padding:28px;border-radius:18px;background:rgba(15,23,42,.46);border:1px solid rgba(96,165,250,.12)
-    }
-    .diff-box{
-      min-height:160px;padding:22px;border-radius:14px;text-align:center;display:grid;align-content:center;
-      background:rgba(15,23,42,.75);border:1px solid rgba(96,165,250,.1)
-    }
-    .diff-box.main{
-      background:linear-gradient(145deg,rgba(37,99,235,.15),rgba(15,23,42,.86));
-      border-color:rgba(96,165,250,.30);box-shadow:0 14px 38px rgba(37,99,235,.09)
-    }
-    .diff-box p{font-size:12.5px;margin-top:7px}
-    .diff-arrow{font-size:22px;color:var(--blue3)}
+@media(max-width:1050px){.lab-hero-grid{grid-template-columns:1fr}.cards.five{grid-template-columns:repeat(3,1fr)}.coverage-columns{grid-template-columns:1fr}}
+@media(max-width:700px){.cards.five{grid-template-columns:1fr}.lab-map,.lab-ui{min-height:210px}.console-grid{grid-template-columns:1fr}.cta .actions{justify-content:flex-start}}
 
-    /* HOW */
-    .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-    .step{
-      position:relative;min-height:168px;padding:22px 18px;border-radius:14px;
-      background:rgba(15,23,42,.58);border:1px solid rgba(59,130,246,.12);transition:.28s ease
+/* Image overlay typography refinement */
+.real-tab-caption,.real-photo-meta{padding:9px 10px;border-radius:9px;background:linear-gradient(135deg,rgba(3,8,18,.76),rgba(8,16,29,.52));backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.real-tab-caption{left:10px;right:10px;bottom:9px;align-items:flex-end}
+.real-photo-meta{left:10px;right:10px;bottom:9px}
+@media(max-width:700px){.real-tab-caption strong,.real-photo-meta strong{font-size:11px}.real-tab-caption span,.real-photo-meta span{font-size:9.5px;line-height:1.4}.real-tab-caption,.real-photo-meta{padding:8px 9px}}
+</style>
+<style>
+.real-photo-card img,.real-tab-photo img,.hardware-photo img{background:linear-gradient(135deg,#0b1424,#17233a);display:block;width:100%;}
+.real-photo-card img{min-height:260px;object-fit:cover;}
+.real-tab-photo img{height:250px;object-fit:cover;}
+.hardware-photo img{height:310px;object-fit:cover;}
+@media(max-width:700px){.real-photo-card img{min-height:210px}.real-tab-photo img{height:210px}.hardware-photo img{height:240px}}
+</style><style>
+.real-photo-card img,.real-tab-photo img,.hardware-photo img{background:#0b1424;display:block;width:100%;object-fit:cover}
+.photo-source a,.real-photo-card figcaption a,.real-tab-photo a,.hardware-photo figcaption a{color:#94a3b8;text-decoration:none}
+.photo-source a:hover,.real-photo-card figcaption a:hover,.real-tab-photo a:hover,.hardware-photo figcaption a:hover{color:#60a5fa}
+</style><style>
+/* Real-photo reliability and presentation */
+.real-photo-card img,.real-tab-photo img,.hardware-photo img{object-fit:cover;object-position:center}
+.real-photo-source,.real-tab-caption>span,.photo-source{max-width:46%;white-space:normal!important;text-align:right}
+@media(max-width:700px){.real-photo-source,.real-tab-caption>span,.photo-source{max-width:52%;font-size:8px!important}}
+</style><style>
+/* Image source labels intentionally removed */
+.real-photo-source,.photo-source,.real-tab-caption>span{display:none!important;}
+.real-photo-meta,.real-tab-caption{justify-content:flex-start!important;}
+</style><style id="coverage-widget-layout-fix">
+/* ===== LABTEST PRO: STANDARDS / COVERAGE WIDGET ===== */
+#coverage .section-head{
+  max-width: 980px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+#coverage .section-head .eyebrow{
+  margin-bottom: 16px;
+}
+#coverage .section-head h2{
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: clamp(2rem, 3.1vw, 3.15rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+#coverage .section-head p{
+  max-width: 820px;
+  margin: 14px auto 0;
+  font-size: clamp(0.98rem, 1.15vw, 1.12rem);
+  line-height: 1.6;
+  text-align: center;
+}
+#coverage .tabs{
+  border-radius: 18px;
+}
+#coverage .tabbar{
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+}
+#coverage .tab-btn{
+  min-height: 44px;
+  padding: 10px 16px;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+}
+#coverage .tab-panel{
+  padding: 26px;
+}
+#coverage .how-grid{
+  display: grid;
+  grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.75fr);
+  gap: 28px;
+  align-items: start;
+}
+#coverage .tab-copy{
+  padding: 2px 0;
+  justify-content: flex-start;
+  align-self: start;
+}
+#coverage .label{
+  display: block;
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+#coverage .tab-copy h3{
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  text-align: left;
+}
+#coverage .tab-copy p{
+  max-width: 46ch;
+  margin: 12px 0 0;
+  font-size: 15px;
+  line-height: 1.62;
+  text-align: left;
+}
+#coverage .coverage-columns{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+#coverage .coverage-box{
+  height: 100%;
+  padding: 20px;
+  border-radius: 12px;
+}
+#coverage .coverage-box h4{
+  margin: 0 0 12px;
+  font: 600 15px/1.3 Outfit, sans-serif;
+  text-align: left;
+}
+#coverage .checklist{
+  display: grid;
+  gap: 10px;
+  margin-top: 0;
+}
+#coverage .checklist span{
+  display: flex;
+  align-items: flex-start;
+  min-height: 46px;
+  padding: 11px 13px;
+  font-size: 14px;
+  line-height: 1.35;
+  text-align: left;
+}
+#coverage .checklist span::before{
+  flex: 0 0 auto;
+  margin-right: 10px;
+}
+#coverage #cov4 .coverage-box{
+  min-height: 100%;
+}
+#coverage .hw-chips{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 4px;
+}
+#coverage .hw-chip{
+  font-size: 13px;
+  line-height: 1.25;
+  padding: 8px 10px;
+}
+#coverage .note{
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+}
+@media (max-width: 900px){
+  #coverage .section-head h2{
+    font-size: clamp(1.85rem, 6vw, 2.5rem);
+  }
+  #coverage .how-grid{
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  #coverage .tab-copy p{
+    max-width: none;
+  }
+}
+@media (max-width: 640px){
+  #coverage .section-head{
+    margin-bottom: 22px;
+  }
+  #coverage .section-head h2{
+    font-size: 1.85rem;
+    line-height: 1.12;
+  }
+  #coverage .section-head p{
+    font-size: 0.95rem;
+  }
+  #coverage .tabbar{
+    padding: 8px;
+  }
+  #coverage .tab-btn{
+    min-height: 40px;
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+  #coverage .tab-panel{
+    padding: 18px;
+  }
+  #coverage .coverage-columns{
+    grid-template-columns: 1fr;
+  }
+  #coverage .tab-copy h3{
+    font-size: 18px;
+  }
+  #coverage .tab-copy p,
+  #coverage .checklist span{
+    font-size: 14px;
+  }
+}
+</style><meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/><meta content="DER Security Corp." name="author"/><meta content="DERSec LabTest Pro" name="application-name"/><meta content="#08101d" name="theme-color"/><meta content="website" property="og:type"/><meta content="DERSec" property="og:site_name"/><meta content="DER Certification Testing Software | DERSec LabTest Pro" property="og:title"/><meta content="Automate DER certification, interoperability testing, laboratory hardware control, measurement capture, and pass/fail assessment for IEEE 1547.1 and UL 1741 SB workflows." property="og:description"/><meta content="https://dersec.io/products/labtest-pro/" property="og:url"/><meta content="en_US" property="og:locale"/><meta content="summary" name="twitter:card"/><meta content="DER Certification Testing Software | DERSec LabTest Pro" name="twitter:title"/><meta content="Automated DER certification and interoperability testing for IEEE 1547.1, UL 1741 SB, laboratory hardware, measurement capture, and traceable pass/fail assessment." name="twitter:description"/><link href="https://dersec.io/products/labtest-pro/" rel="canonical"/><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://dersec.io/#organization",
+      "name": "DER Security Corp.",
+      "alternateName": "DERSec",
+      "url": "https://dersec.io/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://dersec.io/wp-content/uploads/2026/03/Logo.png",
+        "width": 296,
+        "height": 40
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/der-security-corp/",
+        "https://www.youtube.com/@DERSecurity"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://dersec.io/#website",
+      "url": "https://dersec.io/",
+      "name": "DERSec",
+      "publisher": {
+        "@id": "https://dersec.io/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://dersec.io/products/labtest-pro/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "DERSec",
+          "item": "https://dersec.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Products",
+          "item": "https://dersec.io/products/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "DERSec LabTest Pro",
+          "item": "https://dersec.io/products/labtest-pro/"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://dersec.io/products/labtest-pro/#software",
+      "name": "DERSec LabTest Pro",
+      "alternateName": "LabTest Pro",
+      "url": "https://dersec.io/products/labtest-pro/",
+      "description": "DER certification and interoperability testing software that automates laboratory hardware control, standards-based test execution, measurement capture, and traceable pass/fail assessment for grid-connected distributed energy resources.",
+      "applicationCategory": "EngineeringApplication",
+      "applicationSubCategory": "Distributed energy resource certification and interoperability testing",
+      "operatingSystem": "Windows",
+      "provider": {
+        "@id": "https://dersec.io/#organization"
+      },
+      "brand": {
+        "@id": "https://dersec.io/#organization"
+      },
+      "softwareHelp": "https://dersec.io/docs/pro/index.html",
+      "downloadUrl": "https://dersec.io/resources/downloads/",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "DER manufacturers, certification laboratories, power electronics engineers, system test engineers, and interoperability test teams"
+      },
+      "featureList": [
+        "IEEE 1547.1 certification test automation",
+        "UL 1741 SB certification-oriented workflows",
+        "DER interoperability validation",
+        "Programmable grid simulator and DC source control",
+        "Data acquisition and measurement capture",
+        "Automated standards-based test sequences",
+        "Traceable event and timing logs",
+        "Pass/fail assessment and engineering evidence",
+        "Multi-vendor laboratory hardware orchestration"
+      ],
+      "keywords": [
+        "DER certification testing software",
+        "IEEE 1547.1 testing",
+        "UL 1741 SB testing",
+        "DER interoperability testing",
+        "inverter certification testing",
+        "battery energy storage certification testing",
+        "laboratory automation",
+        "grid simulator automation",
+        "DER test lab"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://dersec.io/products/labtest-pro/#webpage",
+      "url": "https://dersec.io/products/labtest-pro/",
+      "name": "DER Certification Testing Software | DERSec LabTest Pro",
+      "description": "DERSec LabTest Pro automates IEEE 1547.1 and UL 1741 SB DER certification testing, laboratory hardware control, interoperability validation, measurement capture, and traceable pass/fail assessment.",
+      "isPartOf": {
+        "@id": "https://dersec.io/#website"
+      },
+      "publisher": {
+        "@id": "https://dersec.io/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://dersec.io/products/labtest-pro/#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://dersec.io/products/labtest-pro/#software"
+      },
+      "inLanguage": "en-US",
+      "dateModified": "2026-09-13",
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Distributed Energy Resources",
+          "alternateName": "DER"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "IEEE 1547.1",
+          "description": "Interconnection test procedures for distributed energy resources."
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "UL 1741 SB",
+          "description": "Certification-oriented testing for advanced inverter grid-support functions."
+        },
+        {
+          "@type": "Thing",
+          "name": "DER interoperability testing"
+        },
+        {
+          "@type": "Thing",
+          "name": "Power electronics laboratory automation"
+        }
+      ]
     }
-    .step:hover{transform:translateY(-3px);border-color:rgba(96,165,250,.35);background:rgba(15,23,42,.82)}
-    .step-no{font-family:'Outfit';font-size:11px;color:var(--blue3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
-    .step p{font-size:13px;margin-top:8px}
-    .step:not(:last-child)::after{
-      content:"→";position:absolute;right:-13px;top:50%;transform:translateY(-50%);
-      color:var(--blue3);font-weight:700;z-index:3
-    }
-
-    /* ARCHITECTURE */
-    .arch-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
-    .arch-visual{
-      min-height:470px;position:relative;overflow:hidden;border-radius:22px;
-      background:radial-gradient(circle at 50% 40%,rgba(37,99,235,.16),transparent 34%),linear-gradient(180deg,#0f172a,#0a0f1e);
-      border:1px solid rgba(96,165,250,.14);box-shadow:var(--shadow)
-    }
-    .arch-visual::before{
-      content:"";position:absolute;inset:0;background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-      background-size:28px 28px
-    }
-    .arch-eut{
-      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-      width:180px;height:180px;border-radius:24px;display:grid;place-items:center;text-align:center;z-index:3;
-      background:radial-gradient(circle,rgba(37,99,235,.26),rgba(15,23,42,.97) 70%);
-      border:1px solid rgba(96,165,250,.26)
-    }
-    .arch-eut strong{font-family:'Outfit';font-size:1.7rem}
-    .arch-eut span{display:block;color:#cbd5e1;font-size:11.5px;margin-top:5px}
-    .arch-device{
-      position:absolute;width:142px;padding:13px;border-radius:15px;z-index:3;
-      background:rgba(10,15,30,.84);border:1px solid rgba(96,165,250,.13)
-    }
-    .arch-device b{display:block;font-size:12px}
-    .arch-device span{display:block;font-size:10.5px;color:#cbd5e1;margin-top:4px}
-    .ad1{left:22px;top:38px}.ad2{right:22px;top:38px}.ad3{left:22px;bottom:38px}.ad4{right:22px;bottom:38px}
-    .arch-panel{
-      padding:24px;border-radius:20px;background:linear-gradient(180deg,#0f172a,#0b1222);
-      border:1px solid rgba(96,165,250,.14);box-shadow:var(--shadow)
-    }
-    .arch-list{display:grid;gap:12px;margin-top:18px}
-    .arch-row{
-      display:grid;grid-template-columns:42px 1fr;gap:13px;align-items:start;padding:14px;
-      border-radius:14px;background:rgba(8,13,25,.50);border:1px solid rgba(96,165,250,.08)
-    }
-    .arch-icon{
-      width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
-      background:rgba(37,99,235,.10);border:1px solid rgba(96,165,250,.13);
-      color:#dbeafe;font-family:'Outfit';font-weight:600
-    }
-    .arch-row p{font-size:12.5px;margin-top:4px}
-
-    /* GENERIC CARDS */
-    .grid{display:grid;gap:18px}
-    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
-    .card{
-      padding:22px;border-radius:16px;background:rgba(15,23,42,.60);
-      border:1px solid rgba(59,130,246,.12);transition:.3s cubic-bezier(.4,0,.2,1)
-    }
-    .card:hover{
-      transform:translateY(-5px);border-color:#2563eb;background:rgba(15,23,42,.86);
-      box-shadow:0 16px 48px rgba(37,99,235,.13)
-    }
-    .card-icon{
-      width:42px;height:42px;border-radius:10px;margin-bottom:15px;display:grid;place-items:center;
-      background:rgba(37,99,235,.10);border:1px solid rgba(96,165,250,.17);
-      color:var(--blue3);font-family:'Outfit';font-weight:600
-    }
-    .card-label{
-      color:var(--blue3);font-family:'Outfit';font-size:10px;font-weight:600;
-      text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px
-    }
-    .card p{font-size:13px;margin-top:8px}
-
-    /* TEST COVERAGE */
-    .coverage-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:24px}
-    .coverage-panel{
-      padding:22px;border-radius:20px;background:linear-gradient(180deg,#0f172a,#0b1222);
-      border:1px solid rgba(96,165,250,.14);box-shadow:var(--shadow)
-    }
-    .coverage-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
-    .coverage-tab{
-      padding:7px 10px;border-radius:999px;background:rgba(37,99,235,.10);
-      border:1px solid rgba(96,165,250,.13);font-size:10.5px;color:#dbeafe
-    }
-    .coverage-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .coverage-item{
-      display:flex;gap:10px;align-items:center;padding:10px 11px;border-radius:12px;
-      background:rgba(8,13,25,.52);border:1px solid rgba(96,165,250,.08);font-size:12px;color:#cbd5e1
-    }
-    .coverage-item i{
-      width:8px;height:8px;border-radius:50%;background:var(--blue3);box-shadow:0 0 8px rgba(96,165,250,.45)
-    }
-    .test-console{
-      min-height:100%;border-radius:20px;padding:20px;background:#0b1222;border:1px solid rgba(96,165,250,.14);box-shadow:var(--shadow)
-    }
-    .console-top{display:flex;justify-content:space-between;gap:10px;align-items:center;padding-bottom:13px;border-bottom:1px solid rgba(148,163,184,.08)}
-    .console-top strong{font-family:'Outfit'}
-    .console-chip{padding:6px 9px;border-radius:999px;background:rgba(52,211,153,.08);color:#a7f3d0;font-size:10px}
-    .console-table{display:grid;gap:9px;margin-top:16px}
-    .console-row{
-      display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:center;padding:10px 11px;
-      border-radius:12px;background:rgba(8,13,25,.56);border:1px solid rgba(96,165,250,.07)
-    }
-    .console-row span{font-size:11.5px;color:#cbd5e1}
-    .console-row b{font-size:10.5px;color:#a7f3d0}
-    .check{
-      width:24px;height:24px;border-radius:8px;display:grid;place-items:center;
-      background:rgba(52,211,153,.08);color:#a7f3d0;font-size:11px
-    }
-
-    /* PROTOCOLS */
-    .protocol-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .protocol-card{
-      min-height:190px;padding:22px;border-radius:18px;background:linear-gradient(145deg,#0f172a,#0d1526);
-      border:1px solid rgba(96,165,250,.11);position:relative;overflow:hidden
-    }
-    .protocol-card::after{
-      content:"";position:absolute;right:-36px;bottom:-45px;width:140px;height:140px;border-radius:50%;
-      background:radial-gradient(circle,rgba(59,130,246,.15),transparent 67%)
-    }
-    .protocol-code{
-      font-family:'Outfit';font-size:2.8rem;line-height:1;font-weight:700;color:rgba(96,165,250,.15);margin-bottom:32px
-    }
-    .protocol-card p{font-size:12.5px;margin-top:8px}
-
-    /* HARDWARE ECOSYSTEM */
-    .hardware-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-    .vendor-panel{
-      padding:22px;border-radius:20px;background:linear-gradient(180deg,#0f172a,#0b1222);
-      border:1px solid rgba(96,165,250,.14)
-    }
-    .vendor-panel h3{margin-bottom:14px}
-    .vendor-cloud{display:flex;gap:8px;flex-wrap:wrap}
-    .vendor{
-      padding:7px 10px;border-radius:9px;background:rgba(37,99,235,.09);
-      border:1px solid rgba(96,165,250,.10);font-size:11.5px;color:#cbd5e1
-    }
-    .io-strip{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px
-    }
-    .io-card{
-      padding:14px;border-radius:14px;background:rgba(8,13,25,.50);border:1px solid rgba(96,165,250,.08);text-align:center
-    }
-    .io-card strong{font-family:'Outfit';font-size:1rem}
-    .io-card p{font-size:10.8px;margin-top:4px}
-
-    /* WORKFLOW */
-    .workflow{
-      display:grid;grid-template-columns:repeat(6,1fr);gap:12px
-    }
-    .work-step{
-      position:relative;padding:20px 16px;border-radius:16px;background:rgba(15,23,42,.58);
-      border:1px solid rgba(96,165,250,.11);min-height:155px
-    }
-    .work-step .metric{
-      font-size:1.7rem;font-weight:700;color:var(--blue3)
-    }
-    .work-step h3{font-size:1rem;margin-top:9px}
-    .work-step p{font-size:11.5px;margin-top:6px}
-    .work-step:not(:last-child)::after{
-      content:"→";position:absolute;right:-13px;top:50%;transform:translateY(-50%);
-      color:var(--blue3);font-weight:700
-    }
-
-    /* TARGET */
-    .target-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    .target-card{
-      min-height:205px;padding:22px;border-radius:18px;position:relative;overflow:hidden;
-      background:linear-gradient(145deg,#0f172a,#0d1526);border:1px solid rgba(96,165,250,.11)
-    }
-    .target-card::after{
-      content:"";position:absolute;right:-35px;bottom:-48px;width:145px;height:145px;border-radius:50%;
-      background:radial-gradient(circle,rgba(59,130,246,.15),transparent 67%)
-    }
-    .target-code{font-family:'Outfit';font-size:2.8rem;color:rgba(96,165,250,.14);font-weight:700;line-height:1;margin-bottom:32px}
-    .target-card p{font-size:12.5px;margin-top:8px}
-
-    /* WHY */
-    .proof-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-    .proof{
-      padding:20px;border-radius:16px;text-align:center;background:rgba(15,23,42,.55);
-      border:1px solid rgba(96,165,250,.11)
-    }
-    .proof .metric{
-      font-size:2rem;font-weight:700;background:linear-gradient(135deg,#60a5fa,#a78bfa);
-      -webkit-background-clip:text;background-clip:text;color:transparent
-    }
-    .proof h3{font-size:1rem;margin-top:8px}
-    .proof p{font-size:11.3px;margin-top:6px}
-
-    /* CTA */
-    .cta{
-      padding:68px 38px;border-radius:20px;text-align:center;position:relative;overflow:hidden;
-      background:radial-gradient(circle at 50% 0%,rgba(37,99,235,.20),transparent 46%),linear-gradient(145deg,#0f172a,#0a0f1e);
-      border:1px solid rgba(96,165,250,.18);box-shadow:var(--shadow)
-    }
-    .cta h2{max-width:880px;margin:0 auto}
-    .cta p{max-width:670px;margin:16px auto 28px}
-    .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-
-    /* FOOTER */
-    footer{background:#090e1a;border-top:1px solid rgba(148,163,184,.08);padding:48px 0 26px}
-    .footer-top{display:grid;grid-template-columns:1.4fr repeat(3,.7fr);gap:38px;padding-bottom:30px}
-    .footer-brand img{width:215px}
-    .footer-brand p{font-size:12.5px;max-width:420px;margin-top:16px}
-    .footer-col h4{font-size:14px;margin-bottom:12px}
-    .footer-col a{display:block;color:var(--muted);font-size:12.5px;margin:8px 0}
-    .footer-col a:hover{color:var(--blue3)}
-    .footer-bottom{padding-top:18px;border-top:1px solid rgba(148,163,184,.08);font-size:12px;color:var(--muted2)}
-
-    @media(max-width:1050px){
-      .hero-inner,.arch-layout,.coverage-layout,.hardware-layout{grid-template-columns:1fr}
-      .problem-grid{grid-template-columns:1fr}
-      .diff-band{grid-template-columns:1fr}
-      .diff-arrow{transform:rotate(90deg);text-align:center}
-      .steps{grid-template-columns:1fr}
-      .step:not(:last-child)::after{content:"↓";right:50%;top:auto;bottom:-19px;transform:translateX(50%)}
-      .grid-3{grid-template-columns:1fr 1fr}
-      .grid-4,.target-grid{grid-template-columns:1fr 1fr}
-      .workflow{grid-template-columns:repeat(3,1fr)}
-      .work-step:not(:last-child)::after{display:none}
-      .proof-grid{grid-template-columns:repeat(3,1fr)}
-      .footer-top{grid-template-columns:1fr 1fr}
-      .nav-links a:not(.nav-contact){display:none}
-    }
-
-    @media(max-width:700px){
-      .container{width:min(var(--max),calc(100% - 24px))}
-      .section{padding:70px 0}
-      .hero{min-height:auto}
-      .hero-inner{padding:68px 0}
-      .hero-metrics,.grid-3,.grid-4,.target-grid,.workflow,.proof-grid,.coverage-list,.protocol-strip,.io-strip{grid-template-columns:1fr}
-      .lab-visual{min-height:620px}
-      .lab-node{width:115px;padding:10px}
-      .ln1{left:12px;top:75px}.ln2{right:12px;top:75px}.ln3{left:12px;bottom:100px}.ln4{right:12px;bottom:100px}
-      .lab-line{display:none}
-      .result-panel{width:calc(100% - 28px);bottom:14px}
-      .lab-core{width:145px;height:145px}
-      .arch-visual{min-height:560px}
-      .arch-device{width:116px}
-      .ad1{left:12px;top:25px}.ad2{right:12px;top:25px}.ad3{left:12px;bottom:25px}.ad4{right:12px;bottom:25px}
-      .footer-top{grid-template-columns:1fr}
-      .brand img{width:190px}
-      .nav-contact{padding:8px 18px}
-    }
-  </style>
-</head>
-
+  ]
+}</script><style id="ai-seo-content-styles">
+/* ===== AI-SEO CONTENT LAYERS ===== */
+.seo-answer-wrap{margin-top:26px}
+.seo-answer-block{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:26px;align-items:start;padding:28px;border:1px solid rgba(96,165,250,.20);border-radius:18px;background:linear-gradient(135deg,rgba(15,23,42,.82),rgba(15,23,42,.54));box-shadow:0 16px 40px rgba(2,6,23,.18)}
+.seo-answer-copy h2,.seo-section-head h2{margin:9px 0 10px;font:700 clamp(1.55rem,2.4vw,2.15rem)/1.15 Outfit,sans-serif;letter-spacing:-.025em;color:#f8fafc}
+.seo-answer-copy p,.seo-section-head p{margin:0;color:#aab7cc;font-size:15px;line-height:1.68}
+.seo-answer-copy p strong{color:#f8fafc;font-weight:600}
+.seo-facts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seo-fact{padding:14px;border:1px solid rgba(96,165,250,.13);border-radius:12px;background:rgba(9,16,30,.72)}
+.seo-fact strong{display:block;color:#60a5fa;font:600 12px/1.2 Inter,sans-serif;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.seo-fact span{display:block;color:#d7e0ed;font:500 13px/1.45 Inter,sans-serif}
+.seo-compact-section{margin-top:34px;padding-top:30px;border-top:1px solid rgba(148,163,184,.12)}
+.seo-section-head{max-width:820px;margin-bottom:20px}
+.seo-audience-grid,.seo-resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.seo-audience-grid>div,.seo-resource-grid>a{display:block;padding:18px;border:1px solid rgba(96,165,250,.15);border-radius:13px;background:rgba(15,23,42,.48);text-decoration:none;transition:border-color .2s ease,transform .2s ease,background .2s ease}
+.seo-audience-grid>div:hover,.seo-resource-grid>a:hover{border-color:rgba(96,165,250,.38);background:rgba(30,58,138,.12);transform:translateY(-2px)}
+.seo-audience-grid strong,.seo-resource-grid strong{display:block;color:#eef4ff;font:600 16px/1.3 Outfit,sans-serif;margin-bottom:7px}
+.seo-audience-grid span,.seo-resource-grid span{display:block;color:#94a3b8;font:400 13.5px/1.55 Inter,sans-serif}
+.seo-resource-grid a strong{color:#60a5fa}
+.seo-faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seo-faq-grid details{border:1px solid rgba(96,165,250,.15);border-radius:12px;background:rgba(15,23,42,.48);overflow:hidden}
+.seo-faq-grid summary{cursor:pointer;list-style:none;padding:15px 18px;color:#eef4ff;font:600 14px/1.4 Outfit,sans-serif;position:relative;padding-right:42px}
+.seo-faq-grid summary::-webkit-details-marker{display:none}
+.seo-faq-grid summary:after{content:'+';position:absolute;right:17px;top:13px;color:#60a5fa;font-size:20px;line-height:1}
+.seo-faq-grid details[open] summary:after{content:'–'}
+.seo-faq-grid details p{margin:0;padding:0 18px 16px;color:#94a3b8;font:400 13.5px/1.6 Inter,sans-serif}
+#how .section-head p,#capabilities .section-head p{max-width:820px;margin:12px auto 0;color:#94a3b8;font-size:15px;line-height:1.6;text-align:center}
+#capabilities .section-head:not(.center) p{text-align:left;margin-left:0}
+@media(max-width:900px){.seo-answer-block{grid-template-columns:1fr}.seo-facts{grid-template-columns:1fr 1fr}.seo-faq-grid{grid-template-columns:1fr}}
+@media(max-width:640px){.seo-answer-block{padding:20px}.seo-facts,.seo-audience-grid,.seo-resource-grid{grid-template-columns:1fr}.seo-answer-copy h2,.seo-section-head h2{font-size:1.55rem}.seo-compact-section{margin-top:28px;padding-top:24px}}
+</style></head>
 <body>
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="https://dersec.io" aria-label="DERSec home">
-        <img src="https://dersec.io/wp-content/uploads/2026/03/Logo.png" alt="DERSec">
-      </a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#how">How it works</a>
-        <a href="#architecture">Lab Architecture</a>
-        <a href="#coverage">Test Coverage</a>
-        <a href="#hardware">Hardware</a>
-        <a class="nav-contact" href="https://dersec.io/contact/">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <!-- 1 HERO -->
-    <section class="hero">
-      <div class="container hero-inner">
-        <div>
-          <span class="eyebrow">DERSec LabTest Pro</span>
-          <h1>Automated certification and interoperability testing <span class="gradient-text">for DER.</span></h1>
-
-          <p class="hero-sub">From laboratory hardware control to data capture and pass/fail assessment.</p>
-          <p class="hero-copy">LabTest Pro automates power-performance and interoperability testing across DER equipment, laboratory instruments, and standards-based test procedures—helping certification teams execute repeatable IEEE 1547.1 and UL 1741 SB workflows.</p>
-
-          <div class="hero-actions">
-            <span class="btn-wrap"><a class="btn btn-primary" href="https://dersec.io/contact/">Request a Demo →</a></span>
-            <span class="btn-wrap"><a class="btn btn-secondary" href="#architecture">Explore Lab Architecture</a></span>
-          </div>
-
-          <div class="hero-pills">
-            <span class="pill">IEEE 1547.1</span>
-            <span class="pill">UL 1741 SB</span>
-            <span class="pill">Automated test sequencing</span>
-            <span class="pill">Pass / fail assessment</span>
-          </div>
-
-          <div class="hero-metrics">
-            <div class="hero-metric">
-              <strong>Orchestrate</strong>
-              <span>Lab hardware</span>
-              <p>Grid simulator, DC source, DAQ, and EUT.</p>
-            </div>
-            <div class="hero-metric">
-              <strong>Automate</strong>
-              <span>Test execution</span>
-              <p>Standards-based sequences and scripted operations.</p>
-            </div>
-            <div class="hero-metric">
-              <strong>Assess</strong>
-              <span>Results</span>
-              <p>Capture logs, process data, determine pass / fail.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="lab-visual" aria-label="LabTest Pro automated DER certification lab visualization">
-          <div class="lab-status">
-            <span class="status-chip ok">● Test Sequence Running</span>
-            <span class="status-chip">IEEE 1547.1</span>
-            <span class="status-chip">UL 1741 SB</span>
-          </div>
-
-          <div class="lab-node ln1"><b>DC Simulator</b><span>Source-side power control</span></div>
-          <div class="lab-node ln2"><b>Grid Simulator</b><span>AC grid conditions & disturbances</span></div>
-          <div class="lab-node ln3"><b>DAQ System</b><span>Measurements & energy data</span></div>
-          <div class="lab-node ln4"><b>Equipment Under Test</b><span>PV · BESS · Wind · DER</span></div>
-
-          <div class="lab-line ll1"></div><div class="lab-line ll2"></div><div class="lab-line ll3"></div><div class="lab-line ll4"></div>
-
-          <div class="lab-core">
-            <div>
-              <strong>LabTest Pro</strong>
-              <span>Orchestrate · Execute · Measure · Validate</span>
-            </div>
-          </div>
-
-          <div class="result-panel">
-            <div class="result-top">
-              <strong>Automated certification run</strong>
-              <span class="pass">Pass criteria tracking</span>
-            </div>
-            <div class="progress"><i></i></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2 PROBLEM -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">The Problem</span>
-          <h2>DER certification testing is complex, hardware-intensive, and repetitive.</h2>
-          <p>Certification workflows require coordinated control of laboratory instruments, DER communications, precise test sequences, high-quality measurements, and standards-based pass/fail analysis.</p>
-        </div>
-
-        <div class="problem-grid">
-          <div class="problem-card">
-            <h3>Manual lab workflows create friction</h3>
-            <div class="issue-list">
-              <div class="issue-item"><div class="issue-icon">01</div><div><b>Multiple systems</b><p>Grid simulators, DC supplies, DAQ systems, and the EUT must operate together.</p></div></div>
-              <div class="issue-item"><div class="issue-icon">02</div><div><b>Repetitive sequences</b><p>Standards-based tests require repeatable steps, timing, and parameter changes.</p></div></div>
-              <div class="issue-item"><div class="issue-icon">03</div><div><b>Large data volumes</b><p>Measurements and logs must be captured and processed consistently.</p></div></div>
-              <div class="issue-item"><div class="issue-icon">04</div><div><b>Assessment overhead</b><p>Engineers must compare results against defined performance criteria.</p></div></div>
-            </div>
-          </div>
-
-          <div class="problem-card solution-card">
-            <h3>LabTest Pro automates the workflow</h3>
-            <div class="issue-list">
-              <div class="issue-item"><div class="issue-icon">01</div><div><b>Control equipment</b><p>Coordinate lab hardware through programmatic interfaces.</p></div></div>
-              <div class="issue-item"><div class="issue-icon">02</div><div><b>Execute test plans</b><p>Run standards-based test sequences consistently.</p></div></div>
-              <div class="issue-item"><div class="issue-icon">03</div><div><b>Capture data</b><p>Log measurements and test events throughout execution.</p></div></div>
-              <div class="issue-item"><div class="issue-icon">04</div><div><b>Assess results</b><p>Process measurements for repeatable pass/fail evaluation.</p></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3 DIFFERENTIATION -->
-    <section class="section alt">
-      <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow">The Difference</span>
-          <h2>Automate the entire <span class="gradient-text">DER certification workflow.</span></h2>
-          <p>LabTest Pro connects standards, laboratory instruments, DER protocols, test execution, data capture, and assessment in one automated environment.</p>
-        </div>
-
-        <div class="diff-band">
-          <div class="diff-box">
-            <div class="card-label">Lab Infrastructure</div>
-            <h3>Hardware + EUT</h3>
-            <p>AC/DC sources, DAQ systems, DER equipment, communications.</p>
-          </div>
-
-          <div class="diff-arrow">→</div>
-
-          <div class="diff-box main">
-            <div class="card-label">Automation Layer</div>
-            <h3>LabTest Pro</h3>
-            <p>Control · Sequence · Measure · Process · Assess</p>
-          </div>
-
-          <div class="diff-arrow">→</div>
-
-          <div class="diff-box">
-            <div class="card-label">Certification Output</div>
-            <h3>Repeatable Test Evidence</h3>
-            <p>Logs, measurements, results, and pass/fail assessment.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4 HOW IT WORKS -->
-    <section class="section" id="how">
-      <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow">How It Works</span>
-          <h2>Configure → Connect → Execute → Measure → Validate</h2>
-        </div>
-
-        <div class="steps">
-          <div class="step">
-            <div class="step-no">Step 01</div>
-            <h3>Configure</h3>
-            <p>Select test procedures, limits, equipment settings, and EUT parameters.</p>
-          </div>
-          <div class="step">
-            <div class="step-no">Step 02</div>
-            <h3>Connect</h3>
-            <p>Establish programmatic control of lab hardware and DER communications.</p>
-          </div>
-          <div class="step">
-            <div class="step-no">Step 03</div>
-            <h3>Execute</h3>
-            <p>Run automated standards-based test sequences and scripted operations.</p>
-          </div>
-          <div class="step">
-            <div class="step-no">Step 04</div>
-            <h3>Measure</h3>
-            <p>Capture power, timing, protocol, and test-event data throughout the run.</p>
-          </div>
-          <div class="step">
-            <div class="step-no">Step 05</div>
-            <h3>Validate</h3>
-            <p>Process results and assess the EUT against required pass/fail criteria.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5 LAB ARCHITECTURE -->
-    <section class="section alt" id="architecture">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Lab Automation Architecture</span>
-          <h2>One control layer across the certification lab.</h2>
-          <p>LabTest Pro coordinates the equipment required to reproduce grid conditions, power the EUT, capture measurements, communicate with the DER, and execute automated tests.</p>
-        </div>
-
-        <div class="arch-layout">
-          <div class="arch-visual" aria-label="LabTest Pro laboratory architecture">
-            <div class="arch-device ad1"><b>DC Simulator</b><span>DC power supply and source profiles</span></div>
-            <div class="arch-device ad2"><b>Grid Simulator</b><span>AC voltage, frequency, disturbances</span></div>
-            <div class="arch-device ad3"><b>Data Acquisition</b><span>Power measurements and captured energy data</span></div>
-            <div class="arch-device ad4"><b>LabTest Pro</b><span>Automated control, sequencing, logging, assessment</span></div>
-
-            <div class="arch-eut">
-              <div>
-                <strong>DER EUT</strong>
-                <span>Equipment Under Test</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="arch-panel">
-            <h3>LabTest manages five coordinated layers</h3>
-            <div class="arch-list">
-              <div class="arch-row"><div class="arch-icon">AC</div><div><h3>Grid Conditions</h3><p>Drive voltage, frequency, ride-through, and grid-support test conditions through the grid simulator.</p></div></div>
-              <div class="arch-row"><div class="arch-icon">DC</div><div><h3>Source Conditions</h3><p>Control DC supplies and input-power conditions used by PV, battery, and other DER test setups.</p></div></div>
-              <div class="arch-row"><div class="arch-icon">DAQ</div><div><h3>Measurement Capture</h3><p>Acquire laboratory data required to evaluate power performance and timing.</p></div></div>
-              <div class="arch-row"><div class="arch-icon">NET</div><div><h3>DER Communications</h3><p>Exercise SunSpec Modbus, IEEE 2030.5 CSIP, and DNP3 interactions with the EUT.</p></div></div>
-              <div class="arch-row"><div class="arch-icon">EUT</div><div><h3>Equipment Under Test</h3><p>Apply controlled lab conditions and assess the DER response against certification requirements.</p></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6 CORE CAPABILITIES -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Core Capabilities</span>
-          <h2>Everything needed to automate a DER certification run.</h2>
-        </div>
-
-        <div class="grid grid-4">
-          <div class="card"><div class="card-icon">▶</div><div class="card-label">Automation</div><h3>Automated Test Sequencing</h3><p>Run repeatable standards-based procedures and scripted operations.</p></div>
-          <div class="card"><div class="card-icon">HW</div><div class="card-label">Orchestration</div><h3>Hardware Control</h3><p>Coordinate grid simulators, DC sources, DAQ equipment, and EUT communications.</p></div>
-          <div class="card"><div class="card-icon">DAQ</div><div class="card-label">Measurement</div><h3>Data Acquisition & Logging</h3><p>Capture test data, logs, events, and measurements throughout execution.</p></div>
-          <div class="card"><div class="card-icon">✓</div><div class="card-label">Assessment</div><h3>Pass / Fail Processing</h3><p>Process results against defined performance and certification criteria.</p></div>
-          <div class="card"><div class="card-icon">P/Q</div><div class="card-label">Performance</div><h3>Power Performance Testing</h3><p>Exercise and measure DER response under controlled grid and source conditions.</p></div>
-          <div class="card"><div class="card-icon">↔</div><div class="card-label">Interoperability</div><h3>Protocol Testing</h3><p>Validate DER communications and control interactions using supported standards.</p></div>
-          <div class="card"><div class="card-icon">{ }</div><div class="card-label">Scripting</div><h3>Custom Operations</h3><p>Extend workflows with scripted steps and lab-specific test logic.</p></div>
-          <div class="card"><div class="card-icon">LOG</div><div class="card-label">Evidence</div><h3>Traceable Test Results</h3><p>Preserve measurements and execution evidence for engineering and certification workflows.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7 STANDARDS & COVERAGE -->
-    <section class="section alt" id="coverage">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Standards & Test Coverage</span>
-          <h2>Automate key IEEE 1547.1 and UL 1741 SB test procedures.</h2>
-          <p>LabTest includes automated testing for interconnection and grid-support functions across voltage, frequency, power, configuration, and monitoring scenarios.</p>
-        </div>
-
-        <div class="coverage-layout">
-          <div class="coverage-panel">
-            <div class="coverage-tabs">
-              <span class="coverage-tab">IEEE 1547.1-2020</span>
-              <span class="coverage-tab">UL 1741 SB</span>
-              <span class="coverage-tab">DER Interoperability</span>
-            </div>
-
-            <div class="coverage-list">
-              <div class="coverage-item"><i></i>Voltage Trip</div>
-              <div class="coverage-item"><i></i>Voltage Ride-Through</div>
-              <div class="coverage-item"><i></i>Voltage Disturbances</div>
-              <div class="coverage-item"><i></i>Frequency Trip</div>
-              <div class="coverage-item"><i></i>Frequency Ride-Through</div>
-              <div class="coverage-item"><i></i>Phase-Angle Ride-Through</div>
-              <div class="coverage-item"><i></i>Enter Service</div>
-              <div class="coverage-item"><i></i>Nameplate / Configuration</div>
-              <div class="coverage-item"><i></i>Limit Active Power</div>
-              <div class="coverage-item"><i></i>Constant Power Factor</div>
-              <div class="coverage-item"><i></i>Volt-Var</div>
-              <div class="coverage-item"><i></i>Watt-Var</div>
-              <div class="coverage-item"><i></i>Constant Reactive Power</div>
-              <div class="coverage-item"><i></i>Volt-Watt</div>
-              <div class="coverage-item"><i></i>Frequency Droop</div>
-              <div class="coverage-item"><i></i>Monitoring</div>
-            </div>
-          </div>
-
-          <div class="test-console">
-            <div class="console-top">
-              <strong>Automated Test Project</strong>
-              <span class="console-chip">Running</span>
-            </div>
-
-            <div class="console-table">
-              <div class="console-row"><div class="check">✓</div><span>Voltage ride-through configuration</span><b>PASS</b></div>
-              <div class="console-row"><div class="check">✓</div><span>Grid simulator parameter setup</span><b>PASS</b></div>
-              <div class="console-row"><div class="check">✓</div><span>DAQ measurement validation</span><b>PASS</b></div>
-              <div class="console-row"><div class="check">✓</div><span>EUT communication check</span><b>PASS</b></div>
-              <div class="console-row"><div class="check">✓</div><span>Test sequence execution</span><b>PASS</b></div>
-              <div class="console-row"><div class="check">✓</div><span>Measurement processing</span><b>PASS</b></div>
-              <div class="console-row"><div class="check">✓</div><span>Pass / fail assessment</span><b>PASS</b></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 8 DER PROTOCOL TESTING -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow">DER Protocol Testing</span>
-          <h2>Validate interoperability alongside power performance.</h2>
-        </div>
-
-        <div class="protocol-strip">
-          <div class="protocol-card"><div class="protocol-code">SS</div><div class="card-label">DER Protocol</div><h3>SunSpec Modbus</h3><p>Exercise device measurements, settings, control functions, and interoperability workflows.</p></div>
-          <div class="protocol-card"><div class="protocol-code">2030</div><div class="card-label">DER Protocol</div><h3>IEEE 2030.5 CSIP</h3><p>Validate standardized utility-facing communications and DER control interactions.</p></div>
-          <div class="protocol-card"><div class="protocol-code">DNP3</div><div class="card-label">DER Protocol</div><h3>DNP3</h3><p>Test telemetry and controls for DER and utility integration scenarios.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 9 HARDWARE -->
-    <section class="section alt" id="hardware">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Hardware Ecosystem</span>
-          <h2>Connect to the equipment already in your certification lab.</h2>
-          <p>LabTest includes drivers for grid simulators, DC simulators, and data-acquisition systems from multiple manufacturers, with laboratory connectivity over Ethernet, serial, and GPIB interfaces.</p>
-        </div>
-
-        <div class="hardware-layout">
-          <div class="vendor-panel">
-            <h3>Grid Simulators</h3>
-            <div class="vendor-cloud">
-              <span class="vendor">Ametek</span><span class="vendor">Chroma</span><span class="vendor">Elgar</span>
-              <span class="vendor">Cinergia</span><span class="vendor">Spitzenberger & Spiess</span>
-              <span class="vendor">ITECH</span><span class="vendor">Keysight</span><span class="vendor">NHR</span>
-              <span class="vendor">Opal-RT</span><span class="vendor">Regatron</span><span class="vendor">Typhoon HIL</span>
-            </div>
-
-            <h3 style="margin-top:22px">DC Simulators</h3>
-            <div class="vendor-cloud">
-              <span class="vendor">Ametek TerraSAS</span><span class="vendor">Chroma</span><span class="vendor">Keysight</span>
-              <span class="vendor">Regatron</span><span class="vendor">NHR</span><span class="vendor">Elektro-Automatik</span>
-              <span class="vendor">ITECH</span><span class="vendor">Magna Power</span>
-            </div>
-          </div>
-
-          <div class="vendor-panel">
-            <h3>Data Acquisition</h3>
-            <div class="vendor-cloud">
-              <span class="vendor">Yokogawa</span><span class="vendor">Chroma</span><span class="vendor">Dewesoft</span>
-              <span class="vendor">Tektronix</span><span class="vendor">Opal-RT</span><span class="vendor">Keysight</span>
-              <span class="vendor">Elspec</span><span class="vendor">Regatron</span><span class="vendor">Typhoon HIL</span>
-            </div>
-
-            <div class="io-strip">
-              <div class="io-card"><strong>Ethernet</strong><p>Network-connected instruments and EUT interfaces.</p></div>
-              <div class="io-card"><strong>Serial</strong><p>Programmatic control for supported lab devices.</p></div>
-              <div class="io-card"><strong>GPIB</strong><p>Instrument automation in traditional lab environments.</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 10 WORKFLOW -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow">Automated Certification Workflow</span>
-          <h2>From test plan to pass/fail assessment.</h2>
-        </div>
-
-        <div class="workflow">
-          <div class="work-step"><div class="metric">01</div><h3>Select Test Plan</h3><p>Choose the standards-based test procedure and EUT configuration.</p></div>
-          <div class="work-step"><div class="metric">02</div><h3>Configure Equipment</h3><p>Set grid simulator, DC source, DAQ, and communications parameters.</p></div>
-          <div class="work-step"><div class="metric">03</div><h3>Execute Sequence</h3><p>Run automated commands, timing, disturbances, and control steps.</p></div>
-          <div class="work-step"><div class="metric">04</div><h3>Capture Measurements</h3><p>Record energy data, telemetry, logs, and test events.</p></div>
-          <div class="work-step"><div class="metric">05</div><h3>Process Results</h3><p>Apply calculations and required evaluation logic to captured data.</p></div>
-          <div class="work-step"><div class="metric">06</div><h3>Assess Pass / Fail</h3><p>Evaluate the EUT against defined certification performance criteria.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 11 TARGET ENVIRONMENTS -->
-    <section class="section alt">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Target Environments</span>
-          <h2>Built for teams responsible for DER qualification and certification.</h2>
-        </div>
-
-        <div class="target-grid">
-          <div class="target-card"><div class="target-code">DER</div><div class="card-label">Manufacturers</div><h3>DER Vendors</h3><p>Automate product validation across PV, BESS, wind, and other DER equipment.</p></div>
-          <div class="target-card"><div class="target-code">PV</div><div class="card-label">Solar</div><h3>PV Manufacturers</h3><p>Validate inverter performance, grid-support behavior, and interoperability.</p></div>
-          <div class="target-card"><div class="target-code">BESS</div><div class="card-label">Storage</div><h3>BESS Manufacturers</h3><p>Test storage-system response, communications, and interconnection functions.</p></div>
-          <div class="target-card"><div class="target-code">NRTL</div><div class="card-label">Certification</div><h3>Testing Laboratories</h3><p>Execute repeatable certification workflows with broad lab-hardware support.</p></div>
-          <div class="target-card"><div class="target-code">R&D</div><div class="card-label">Engineering</div><h3>R&D Laboratories</h3><p>Automate repeatable experimentation, interoperability checks, and performance testing.</p></div>
-          <div class="target-card"><div class="target-code">INT</div><div class="card-label">Interoperability</div><h3>Integration Teams</h3><p>Validate DER protocols and grid functions before certification or deployment.</p></div>
-          <div class="target-card"><div class="target-code">QA</div><div class="card-label">Quality</div><h3>Product QA Teams</h3><p>Build repeatable regression and standards-validation workflows around lab hardware.</p></div>
-          <div class="target-card"><div class="target-code">LAB</div><div class="card-label">Certification Labs</div><h3>Grid Interconnection Testing</h3><p>Coordinate instruments, EUT communications, measurement capture, and assessment.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 12 WHY DERSEC -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow">Why DERSec</span>
-          <h2>Built on DER standards expertise and real certification workflows.</h2>
-        </div>
-
-        <div class="proof-grid">
-          <div class="proof"><div class="metric">AUTO</div><h3>Automated Compliance</h3><p>End-to-end automation with data logging and pass/fail assessment.</p></div>
-          <div class="proof"><div class="metric">HW+</div><h3>Broad Hardware Support</h3><p>Drivers for leading grid simulators, DC supplies, and DAQ systems.</p></div>
-          <div class="proof"><div class="metric">STD</div><h3>Standards Expertise</h3><p>Built around DER interconnection and interoperability standards.</p></div>
-          <div class="proof"><div class="metric">LAB</div><h3>Industry Use</h3><p>Used by DER manufacturers and certification laboratories.</p></div>
-          <div class="proof"><div class="metric">P/P</div><h3>Flexible Licensing</h3><p>LabTest Plus and Pro tiers support different laboratory needs.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 13 CTA -->
-    <section class="section" id="demo">
-      <div class="container">
-        <div class="cta">
-          <span class="eyebrow">Request a Demo</span>
-          <h2>Turn complex DER certification procedures into repeatable automated workflows.</h2>
-          <p>See how LabTest Pro can coordinate laboratory hardware, execute IEEE 1547.1 and UL 1741 SB test procedures, capture measurements, and assess DER performance in one environment.</p>
-
-          <div class="cta-actions">
-            <span class="btn-wrap"><a class="btn btn-primary" href="https://dersec.io/contact/">Request a Demo →</a></span>
-            <span class="btn-wrap">
-              <a class="btn btn-secondary" href="./DERSec_LabTest_Product_Brief_2026-03-02.pdf" target="_blank" rel="noopener">
-                Download Product Spec Sheet
-              </a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <img src="https://dersec.io/wp-content/uploads/2026/03/Logo.png" alt="DERSec">
-          <p>AI-native OT cybersecurity, interoperability, simulation, and DER certification tooling for distributed energy.</p>
-        </div>
-
-        <div class="footer-col">
-          <h4>Platform</h4>
-          <a href="https://dersec.io/platform/">Overview</a>
-          <a href="https://dersec.io/products/#dersec-sentry">DERSec Sentry</a>
-          <a href="https://dersec.io/products/#dersync">DERSync Gateway</a>
-          <a href="https://dersec.io/products/#dersim">DERSim Digital Twins</a>
-          <a href="https://dersec.io/products/#labtest">LabTest Pro</a>
-        </div>
-
-        <div class="footer-col">
-          <h4>Solutions</h4>
-          <a href="https://dersec.io/solutions/#ai-datacenters">AI Datacenters</a>
-          <a href="https://dersec.io/solutions/#microgrids">Microgrids</a>
-          <a href="https://dersec.io/solutions/#emobility">Electric Mobility</a>
-        </div>
-
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="https://dersec.io/about/">About</a>
-          <a href="https://dersec.io/news/">Blog</a>
-          <a href="https://dersec.io/contact/">Contact</a>
-        </div>
-      </div>
-
-      <div class="footer-bottom">©2026 DER Security Corp. All Rights Reserved.</div>
-    </div>
-  </footer>
+<header class="ds-header">
+<div class="container ds-nav">
+<a aria-label="DERSec home" class="ds-brand" href="https://dersec.io/">
+<img alt="DER Security" src="https://dersec.io/wp-content/uploads/2026/03/Logo.png"/>
+</a>
+<nav aria-label="Primary navigation" class="ds-desktop-nav">
+<div class="ds-nav-item ds-has-menu">
+<button aria-haspopup="true" class="ds-nav-trigger" type="button">Products</button>
+<div class="ds-mega ds-mega-products" role="menu">
+<div class="ds-mega-col">
+<a class="ds-menu-link ds-menu-primary" href="https://dersec.io/platform/"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="6" rx="1" width="6" x="4" y="4"></rect><rect height="6" rx="1" width="6" x="14" y="4"></rect><rect height="6" rx="1" width="6" x="4" y="14"></rect><rect height="6" rx="1" width="6" x="14" y="14"></rect></svg><span>Platform Overview</span></a>
+<div class="ds-menu-heading">Products</div>
+<a class="ds-menu-link" href="https://dersec.io/products/#dersec-sentry"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M12 3l7 3v5c0 4.8-2.8 8.4-7 10-4.2-1.6-7-5.2-7-10V6l7-3z"></path></svg><span>DERSec Sentry</span></a>
+<a class="ds-menu-link" href="https://dersec.io/products/#dersync"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M7 7h10l-2.5-2.5M17 17H7l2.5 2.5M18 7l2 2-2 2M6 17l-2-2 2-2"></path></svg><span>DERSync Protocol Gateway</span></a>
+<a class="ds-menu-link" href="https://dersec.io/products/#dersim"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="6" rx="1" width="16" x="4" y="5"></rect><rect height="6" rx="1" width="16" x="4" y="13"></rect><path d="M8 8h.01M8 16h.01M12 8h4M12 16h4"></path></svg><span>DERSim Digital Twins</span></a>
+<a aria-current="page" class="ds-menu-link" href="https://dersec.io/products/#labtest-pro"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="13" rx="2" width="18" x="3" y="4"></rect><path d="M8 21h8M12 17v4"></path></svg><span>DERSec LabTest Pro</span></a>
+<a class="ds-menu-link" href="https://dersec.io/partners/"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Partner Solutions</span></a>
+</div>
+<div class="ds-mega-col ds-driver-col">
+<div class="ds-menu-heading">Market Drivers</div>
+<a class="ds-menu-link" href="https://dersec.io/platform/market-drivers/#industry-trends"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2zM18 15l.9 2.6L21.5 18l-2.6.9L18 21.5l-.9-2.6-2.6-.9 2.6-.4L18 15z"></path></svg><span>Artificial Intelligence</span></a>
+<a class="ds-menu-link" href="https://dersec.io/platform/market-drivers/#regulatory-push"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M6 2h8l4 4v16H6z"></path><path d="M14 2v5h5M9 12h6M9 16h6"></path></svg><span>DER Standards</span></a>
+<a class="ds-menu-link" href="https://dersec.io/platform/market-drivers/#regulatory-push"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M12 3l7 3v5c0 4.8-2.8 8.4-7 10-4.2-1.6-7-5.2-7-10V6l7-3z"></path><path d="M9 12l2 2 4-4"></path></svg><span>Regulatory Compliance</span></a>
+</div>
+</div>
+</div>
+<div class="ds-nav-item ds-has-menu">
+<button aria-haspopup="true" class="ds-nav-trigger" type="button">Solutions</button>
+<div class="ds-mega ds-mega-solutions" role="menu">
+<div class="ds-mega-col">
+<div class="ds-menu-heading">Industry Solutions</div>
+<a class="ds-menu-link" href="https://dersec.io/solutions/#ai-datacenters"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M5 21V5h10v16M9 9h2M9 13h2M9 17h2M15 10h4v11M3 21h18"></path></svg><span>AI Datacenters</span></a>
+<a class="ds-menu-link" href="https://dersec.io/solutions/#microgrids"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><circle cx="6" cy="6" r="2"></circle><circle cx="18" cy="6" r="2"></circle><circle cx="12" cy="18" r="2"></circle><path d="M8 7.2l3 8M16 7.2l-3 8M8 6h8"></path></svg><span>Microgrids</span></a>
+<a class="ds-menu-link" href="https://dersec.io/solutions/#distributed-energy"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2zM18 15l.9 2.6L21.5 18l-2.6.9L18 21.5l-.9-2.6-2.6-.9 2.6-.4L18 15z"></path></svg><span>Distributed Energy</span></a>
+<a class="ds-menu-link" href="https://dersec.io/solutions/#emobility"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M5 16h14l-1-5H7l-2 5zM7 11l2-4h6l2 4M7 16v2M17 16v2"></path></svg><span>Electric Mobility</span></a>
+<a class="ds-menu-link" href="https://dersec.io/solutions/#vpp-derms"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><circle cx="6" cy="6" r="2"></circle><circle cx="18" cy="6" r="2"></circle><circle cx="12" cy="18" r="2"></circle><path d="M8 7.2l3 8M16 7.2l-3 8M8 6h8"></path></svg><span>VPP and DERMS</span></a>
+</div>
+<div class="ds-mega-col">
+<div class="ds-menu-heading">Services</div>
+<a class="ds-menu-link" href="https://dersec.io/services/#cyber-advisory"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M12 3l7 3v5c0 4.8-2.8 8.4-7 10-4.2-1.6-7-5.2-7-10V6l7-3z"></path></svg><span>Cyber Advisory</span></a>
+<a class="ds-menu-link" href="https://dersec.io/services/#der-simulation"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2zM4 6.5l8 4.5 8-4.5M12 11v9"></path></svg><span>Cyber Simulation</span></a>
+<a class="ds-menu-link" href="https://dersec.io/services/#professional-services"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="13" rx="2" width="18" x="3" y="7"></rect><path d="M9 7V5h6v2M3 12h18"></path></svg><span>Professional Services</span></a>
+</div>
+</div>
+</div>
+<div class="ds-nav-item ds-has-menu">
+<button aria-haspopup="true" class="ds-nav-trigger" type="button">Resources</button>
+<div class="ds-mega ds-mega-small" role="menu">
+<a class="ds-menu-link" href="https://dersec.io/news/"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="18" rx="2" width="16" x="4" y="3"></rect><path d="M8 7h8M8 11h8M8 15h5"></path></svg><span>Blog &amp; Insights</span></a>
+<a class="ds-menu-link" href="https://dersec.io/whitepapers/"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M6 2h8l4 4v16H6z"></path><path d="M14 2v5h5M9 12h6M9 16h6"></path></svg><span>Whitepapers</span></a>
+<a class="ds-menu-link" href="https://dersec.io/resources/downloads/"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M12 3v12M8 11l4 4 4-4M4 17v3h16v-3"></path></svg><span>Software Downloads</span></a>
+</div>
+</div>
+<div class="ds-nav-item ds-has-menu">
+<button aria-haspopup="true" class="ds-nav-trigger" type="button">Company</button>
+<div class="ds-mega ds-mega-small" role="menu">
+<a class="ds-menu-link" href="https://dersec.io/about/"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M5 21V5h10v16M9 9h2M9 13h2M9 17h2M15 10h4v11M3 21h18"></path></svg><span>About</span></a>
+<a class="ds-menu-link" href="https://dersec.io/about/#leadership"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Team</span></a>
+<a class="ds-menu-link" href="https://dersec.io/careers/"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="13" rx="2" width="18" x="3" y="7"></rect><path d="M9 7V5h6v2M3 12h18"></path></svg><span>Careers</span></a>
+<a class="ds-menu-link" href="https://dersec.io/contact/"><svg aria-hidden="true" class="ds-mi" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="M3 7l9 7 9-7"></path></svg><span>Contact Us</span></a>
+</div>
+</div>
+<a class="ds-contact" href="https://dersec.io/contact/">Contact</a>
+</nav>
+<button aria-controls="ds-mobile-menu" aria-expanded="false" aria-label="Open navigation" class="ds-mobile-toggle" type="button">
+<span></span><span></span><span></span>
+</button>
+</div>
+<nav aria-label="Mobile navigation" class="ds-mobile-menu" id="ds-mobile-menu">
+<details><summary>Products</summary><div class="ds-mobile-group">
+<a href="https://dersec.io/platform/">Platform Overview</a>
+<a href="https://dersec.io/products/#dersec-sentry">DERSec Sentry</a>
+<a href="https://dersec.io/products/#dersync">DERSync Protocol Gateway</a>
+<a href="https://dersec.io/products/#dersim">DERSim Digital Twins</a>
+<a aria-current="page" href="https://dersec.io/products/#labtest-pro">DERSec LabTest Pro</a>
+<a href="https://dersec.io/partners/">Partner Solutions</a>
+<a href="https://dersec.io/platform/market-drivers/#industry-trends">Artificial Intelligence</a>
+<a href="https://dersec.io/platform/market-drivers/#regulatory-push">DER Standards</a>
+<a href="https://dersec.io/platform/market-drivers/#regulatory-push">Regulatory Compliance</a>
+</div></details>
+<details><summary>Solutions</summary><div class="ds-mobile-group">
+<a href="https://dersec.io/solutions/#ai-datacenters">AI Datacenters</a><a href="https://dersec.io/solutions/#microgrids">Microgrids</a><a href="https://dersec.io/solutions/#distributed-energy">Distributed Energy</a><a href="https://dersec.io/solutions/#emobility">Electric Mobility</a><a href="https://dersec.io/solutions/#vpp-derms">VPP and DERMS</a><a href="https://dersec.io/services/#cyber-advisory">Cyber Advisory</a><a href="https://dersec.io/services/#der-simulation">Cyber Simulation</a><a href="https://dersec.io/services/#professional-services">Professional Services</a>
+</div></details>
+<details><summary>Resources</summary><div class="ds-mobile-group"><a href="https://dersec.io/news/">Blog &amp; Insights</a><a href="https://dersec.io/whitepapers/">Whitepapers</a><a href="https://dersec.io/resources/downloads/">Software Downloads</a></div></details>
+<details><summary>Company</summary><div class="ds-mobile-group"><a href="https://dersec.io/about/">About</a><a href="https://dersec.io/about/#leadership">Team</a><a href="https://dersec.io/careers/">Careers</a><a href="https://dersec.io/contact/">Contact Us</a></div></details>
+<a class="ds-mobile-contact" href="https://dersec.io/contact/">Contact</a>
+</nav>
+</header>
+<main>
+<section class="hero" id="overview">
+<div class="container hero-inner">
+<div>
+<span class="eyebrow">DERSec LabTest Pro</span>
+<h1>Automated DER Certification and Interoperability Testing <span class="gradient">Software</span></h1>
+<p class="hero-sub">Automate standards-based DER testing from laboratory hardware control to traceable pass/fail evidence.</p>
+<p class="hero-copy">DERSec LabTest Pro is DER certification and interoperability testing software for grid-connected distributed energy resources. It coordinates laboratory instruments, DER communications, standards-based test sequences, measurement capture, and assessment in one automated environment for repeatable IEEE 1547.1 and UL 1741 SB workflows.</p>
+<div class="actions">
+<span class="btn-wrap"><a aria-label="Request a demo of DERSec LabTest Pro DER certification testing software" class="btn btn-primary" href="https://dersec.io/contact/">Request a LabTest Pro Demo →</a></span>
+<span class="btn-wrap"><a class="btn btn-secondary" href="#how">See How It Works</a></span>
+</div>
+<div class="pills">
+<span class="pill">IEEE 1547.1</span>
+<span class="pill">UL 1741 SB</span>
+<span class="pill">Native DER interoperability</span>
+<span class="pill">Automated lab orchestration</span>
+</div>
+</div>
+<div aria-label="LabTest Pro automation overview" class="hero-gallery">
+<div class="real-photo-grid"><figure class="real-photo-card"><img alt="Power electronics test laboratory with programmable sources, converter hardware, real-time simulator, and measurement equipment" decoding="async" fetchpriority="high" loading="eager" onerror="this.onerror=function(){this.style.display='none'};this.src='https://engtech.dtu.dk/english/-/media/institutter/engineering_technology/forskning-og-udvikling/sektioner/energy-technology-and-computer-science/labs/208a8599_1_web.jpg?hash=B9CD6570092AD81F1A3F53A4D74D5758&amp;rh=0&amp;rw=960'" referrerpolicy="no-referrer" src="https://engtech.dtu.dk/english/-/media/institutter/engineering_technology/forskning-og-udvikling/sektioner/energy-technology-and-computer-science/labs/208a8599_1_web.jpg?hash=B9CD6570092AD81F1A3F53A4D74D5758&amp;rh=0&amp;rw=960"/><figcaption class="real-photo-meta"><div><strong>Programmable DER test laboratory</strong><span>Power-electronics test bench with programmable sources, real-time simulation, converter hardware, and measurement instrumentation.</span></div></figcaption></figure><figure class="real-photo-card"><img alt="Engineer testing a utility-scale solar inverter in a multi-megawatt power electronics laboratory" decoding="async" fetchpriority="high" loading="eager" onerror="this.onerror=function(){this.style.display='none'};this.src='https://engtech.dtu.dk/english/-/media/institutter/engineering_technology/forskning-og-udvikling/sektioner/energy-technology-and-computer-science/labs/208a8599_1_web.jpg?hash=B9CD6570092AD81F1A3F53A4D74D5758&amp;rh=0&amp;rw=960'" referrerpolicy="no-referrer" src="https://www.ise.fraunhofer.de/en/press-media/news/2019/new-multi-megawatt-laboratory-demonstrates-operational-readiness/jcr%3Acontent/fixedContent/pressArticleParsys/textwithasset/imageComponent/image.img.jpg/1630498320460/pruefung-solarwechselrichter.jpg"/><figcaption class="real-photo-meta"><div><strong>Utility-scale inverter testing</strong><span>Real inverter-under-test environment with live waveform monitoring and laboratory control equipment.</span></div></figcaption></figure></div>
+<div aria-label="LabTest capabilities" class="hero-strip"><span class="chip core">Control</span><span class="arrow">→</span><span class="chip">Sequence</span><span class="arrow">→</span><span class="chip">Measure</span><span class="arrow">→</span><span class="chip">Assess</span><span class="arrow">→</span><span class="chip pass">PASS / FAIL</span></div>
+</div>
+</div><div class="container seo-answer-wrap">
+<section aria-labelledby="what-is-labtest-pro" class="seo-answer-block">
+<div class="seo-answer-copy">
+<span class="eyebrow">Product Definition</span>
+<h2 id="what-is-labtest-pro">What is DERSec LabTest Pro?</h2>
+<p><strong>DERSec LabTest Pro is automated DER certification and interoperability testing software.</strong> It connects standards-based test procedures with programmable laboratory hardware, DER communications, data acquisition, and pass/fail assessment so engineering teams can run repeatable certification workflows for grid-connected energy devices.</p>
+</div>
+<div aria-label="LabTest Pro at a glance" class="seo-facts">
+<div class="seo-fact"><strong>Standards</strong><span>IEEE 1547.1 and UL 1741 SB workflows</span></div>
+<div class="seo-fact"><strong>Test Assets</strong><span>Solar inverters, BESS, wind, and other DER</span></div>
+<div class="seo-fact"><strong>Lab Control</strong><span>Grid simulators, DC sources, DAQ, analyzers, and EUT interfaces</span></div>
+<div class="seo-fact"><strong>Output</strong><span>Measurements, logs, repeatable results, and traceable pass/fail evidence</span></div>
+</div>
+</section>
+</div>
+<div class="container">
+<div class="insight">
+<div class="insight-grid">
+<div>
+<span class="eyebrow">The Problem + The Difference</span>
+<h2>Challenges in DER Certification Testing</h2>
+<p>DER certification testing becomes slow and difficult to reproduce when grid simulators, DC sources, data acquisition, DER communications, test logic, and engineering evidence are managed in separate workflows. LabTest Pro coordinates them in one test environment.</p>
+</div>
+<div class="compare">
+<div class="compare-card">
+<h3>Manual lab workflow</h3>
+<div class="mini-list"><span>Instrument-by-instrument setup</span><span>Repeated test execution</span><span>Separate logs and calculations</span></div>
+</div>
+<div class="compare-card highlight">
+<h3>LabTest Pro workflow</h3>
+<div class="mini-list"><span>Programmatic equipment control</span><span>Repeatable test sequences</span><span>Traceable measurement + assessment</span></div>
+</div>
+</div>
+</div>
+<div class="verification">
+<span class="label">One automated evidence chain</span><span class="vstep">Test Plan</span><span class="arrow">→</span><span class="vstep">Lab Control</span><span class="arrow">→</span><span class="vstep">Execution</span><span class="arrow">→</span><span class="vstep">Measurements</span><span class="arrow">→</span><span class="vstep">Pass / Fail</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="how">
+<div class="container">
+<div class="section-head center"><span class="eyebrow">How It Works</span><h2>How LabTest Pro Automates DER Certification Testing</h2><p>A repeatable five-step workflow turns standards-based test procedures into controlled laboratory execution and traceable engineering evidence.</p></div>
+<div class="tabs" data-tabs="">
+<div aria-label="LabTest Pro workflow" class="tabbar" role="tablist">
+<button aria-controls="lab1" aria-selected="true" class="tab-btn" id="workflow-tab-1" role="tab">Configure</button>
+<button aria-controls="lab2" aria-selected="false" class="tab-btn" id="workflow-tab-2" role="tab">Connect</button>
+<button aria-controls="lab3" aria-selected="false" class="tab-btn" id="workflow-tab-3" role="tab">Execute</button>
+<button aria-controls="lab4" aria-selected="false" class="tab-btn" id="workflow-tab-4" role="tab">Measure</button>
+<button aria-controls="lab5" aria-selected="false" class="tab-btn" id="workflow-tab-5" role="tab">Validate</button>
+</div>
+<div aria-labelledby="workflow-tab-1" class="tab-panel" id="lab1" role="tabpanel"><div class="how-grid"><div class="tab-copy"><span class="label">Configure</span><h3>Turn the test plan into an executable run</h3><p>Select the standards-based procedure, EUT parameters, equipment settings, limits, and test conditions before execution.</p></div><div class="lab-tab-visual"><div class="real-tab-photo"><img alt="Researcher probing power electronics hardware during laboratory testing at NREL" decoding="async" loading="lazy" onerror="this.onerror=function(){this.style.display='none'};this.src='https://engtech.dtu.dk/english/-/media/institutter/engineering_technology/forskning-og-udvikling/sektioner/energy-technology-and-computer-science/labs/208a8599_1_web.jpg?hash=B9CD6570092AD81F1A3F53A4D74D5758&amp;rh=0&amp;rw=960'" referrerpolicy="no-referrer" src="https://www.energy.gov/sites/prod/files/styles/borealis_photo_gallery_large_respondxl/public/38624_0.jpg?itok=zm5E0jo-"/><div class="real-tab-caption"><div><strong>Configure the test environment</strong><span>Hands-on power-electronics setup and instrumentation before automated execution.</span></div></div></div><div class="diagram"><div class="flow"><span class="active">Test Plan</span><b class="arrow">→</b><span>Limits</span><b class="arrow">→</b><span>EUT Setup</span></div></div></div></div></div>
+<div aria-labelledby="workflow-tab-2" class="tab-panel" hidden="" id="lab2" role="tabpanel"><div class="how-grid"><div class="tab-copy"><span class="label">Connect</span><h3>Coordinate the lab from one control layer</h3><p>Establish programmatic control of grid simulators, DC sources, data acquisition, and DER communication interfaces.</p></div><div class="lab-tab-visual"><div class="real-tab-photo"><img alt="Smart grid laboratory inverter and control equipment connected to a laboratory workstation" decoding="async" loading="lazy" onerror="this.onerror=function(){this.style.display='none'};this.src='https://engtech.dtu.dk/english/-/media/institutter/engineering_technology/forskning-og-udvikling/sektioner/energy-technology-and-computer-science/labs/208a8599_1_web.jpg?hash=B9CD6570092AD81F1A3F53A4D74D5758&amp;rh=0&amp;rw=960'" referrerpolicy="no-referrer" src="https://www.static.tu.berlin/fileadmin/www/_processed_/2/5/csm_Labor_Inv_1f98beaf53.jpg"/><div class="real-tab-caption"><div><strong>Connect laboratory equipment</strong><span>Programmable inverter and control hardware connected through a centralized laboratory workstation.</span></div></div></div><div class="diagram"><div class="flow"><span>Hardware</span><b class="arrow">→</b><span class="active">LabTest Pro</span><b class="arrow">→</b><span>DER EUT</span></div></div></div></div></div>
+<div aria-labelledby="workflow-tab-3" class="tab-panel" hidden="" id="lab3" role="tabpanel"><div class="how-grid"><div class="tab-copy"><span class="label">Execute</span><h3>Run standards-based sequences consistently</h3><p>Automate commands, timing, grid disturbances, source conditions, and scripted operations with repeatable sequencing.</p></div><div class="lab-tab-visual"><div class="real-tab-photo"><img alt="Engineer operating a three-phase inverter test bench with power supplies, instrumentation, and diagnostic software" decoding="async" loading="lazy" onerror="this.onerror=function(){this.style.display='none'};this.src='https://engtech.dtu.dk/english/-/media/institutter/engineering_technology/forskning-og-udvikling/sektioner/energy-technology-and-computer-science/labs/208a8599_1_web.jpg?hash=B9CD6570092AD81F1A3F53A4D74D5758&amp;rh=0&amp;rw=960'" referrerpolicy="no-referrer" src="https://www.secretariat.ntust.edu.tw/var/file/63/1063/img/616955958.jpg"/><div class="real-tab-caption"><div><strong>Execute the automated sequence</strong><span>A real inverter test bench combining power hardware, sensors, control software, and diagnostic instruments.</span></div></div></div><div class="diagram"><div class="flow"><span class="active">Test Sequence</span><b class="arrow">→</b><span>Grid Event</span><b class="arrow">→</b><span>DER Response</span></div></div></div></div></div>
+<div aria-labelledby="workflow-tab-4" class="tab-panel" hidden="" id="lab4" role="tabpanel"><div class="how-grid"><div class="tab-copy"><span class="label">Measure</span><h3>Capture the evidence required for engineering decisions</h3><p>Record power, timing, telemetry, protocol interactions, logs, and test events throughout the run.</p></div><div class="lab-tab-visual"><div class="real-tab-photo"><img alt="Oscilloscope, multimeter, power supplies, and electronic measurement equipment on a laboratory bench" decoding="async" loading="lazy" onerror="this.onerror=function(){this.style.display='none'};this.src='https://engtech.dtu.dk/english/-/media/institutter/engineering_technology/forskning-og-udvikling/sektioner/energy-technology-and-computer-science/labs/208a8599_1_web.jpg?hash=B9CD6570092AD81F1A3F53A4D74D5758&amp;rh=0&amp;rw=960'" referrerpolicy="no-referrer" src="https://cnerc.astri.org/images/lab-pic4.jpg"/><div class="real-tab-caption"><div><strong>Capture measurements</strong><span>Oscilloscope and precision measurement equipment used to capture voltage, current, and waveform behavior.</span></div></div></div><div class="diagram"><div class="flow"><span>Signals</span><b class="arrow">→</b><span class="active">DAQ / Analyzer</span><b class="arrow">→</b><span>Data Record</span></div></div></div></div></div>
+<div aria-labelledby="workflow-tab-5" class="tab-panel" hidden="" id="lab5" role="tabpanel"><div class="how-grid"><div class="tab-copy"><span class="label">Validate</span><h3>Convert measurements into traceable pass/fail assessment</h3><p>Process captured results against defined performance and certification criteria, preserving execution evidence for review.</p></div><div class="lab-tab-visual"><div class="real-tab-photo"><img alt="Engineers reviewing real-time smart inverter test waveforms in an NREL laboratory" decoding="async" loading="lazy" onerror="this.onerror=function(){this.style.display='none'};this.src='https://engtech.dtu.dk/english/-/media/institutter/engineering_technology/forskning-og-udvikling/sektioner/energy-technology-and-computer-science/labs/208a8599_1_web.jpg?hash=B9CD6570092AD81F1A3F53A4D74D5758&amp;rh=0&amp;rw=960'" referrerpolicy="no-referrer" src="https://spectrum.ieee.org/media-library/img.jpg?id=25581723&amp;quality=85&amp;width=600"/><div class="real-tab-caption"><div><strong>Validate inverter response</strong><span>Engineers review measured inverter behavior and grid-response waveforms during laboratory validation.</span></div></div></div><div class="diagram"><div class="flow"><span>Measurements</span><b class="arrow">→</b><span>Criteria</span><b class="arrow">→</b><span class="active">PASS / FAIL</span></div></div></div></div></div>
+</div>
+</div>
+</section>
+<section class="section" id="capabilities">
+<div class="container">
+<div class="section-head"><span class="eyebrow">Lab Automation Architecture</span><h2>LabTest Pro Certification Lab Architecture</h2><p>Coordinate the equipment required to reproduce grid conditions, power the EUT, capture measurements, communicate with the DER, and execute automated test logic.</p></div>
+<div aria-label="Representative DER laboratory environments" class="arch-photo-row"><figure class="real-photo-card compact"><img alt="OPAL-RT real-time simulator, oscilloscope, and power electronics hardware in an integrated energy systems laboratory" decoding="async" loading="lazy" onerror="this.onerror=function(){this.style.display='none'};this.src='https://engtech.dtu.dk/english/-/media/institutter/engineering_technology/forskning-og-udvikling/sektioner/energy-technology-and-computer-science/labs/208a8599_1_web.jpg?hash=B9CD6570092AD81F1A3F53A4D74D5758&amp;rh=0&amp;rw=960'" referrerpolicy="no-referrer" src="https://www.aaudxp-cms.aau.dk/media/brtdizgy/20171023_lho8886.jpg"/><figcaption class="real-photo-meta"><div><strong>Real-time simulation and HIL</strong><span>OPAL-RT, oscilloscope, and connected power electronics for hardware-in-the-loop testing.</span></div></figcaption></figure><figure class="real-photo-card compact"><img alt="Engineer testing inverter electronics with an oscilloscope and probes in a university power electronics laboratory" decoding="async" loading="lazy" onerror="this.onerror=function(){this.style.display='none'};this.src='https://engtech.dtu.dk/english/-/media/institutter/engineering_technology/forskning-og-udvikling/sektioner/energy-technology-and-computer-science/labs/208a8599_1_web.jpg?hash=B9CD6570092AD81F1A3F53A4D74D5758&amp;rh=0&amp;rw=960'" referrerpolicy="no-referrer" src="https://1.bp.blogspot.com/-VlBNJ_WfRo8/YHeWecEev5I/AAAAAAABl6k/q928RsvTn-M0iDHXmY_Ly9uJ65BG4vcVwCLcBGAsYHQ/s1210/suzuki2.jpg"/><figcaption class="real-photo-meta"><div><strong>Instrumented inverter validation</strong><span>Bench-level inverter hardware connected to an oscilloscope for waveform and response validation.</span></div></figcaption></figure></div><div class="cards five">
+<div class="card"><div class="card-icon">AC</div><h3>Grid Conditions</h3><p>Drive voltage, frequency, ride-through, and grid-support conditions through supported grid simulators.</p><span class="subtag">Grid simulator</span></div>
+<div class="card"><div class="card-icon">DC</div><h3>Source Conditions</h3><p>Control input-power conditions for PV, battery, and other DER test configurations.</p><span class="subtag">DC source</span></div>
+<div class="card"><div class="card-icon">DAQ</div><h3>Measurement Capture</h3><p>Acquire laboratory data required to evaluate power performance, timing, and response.</p><span class="subtag">Data acquisition</span></div>
+<div class="card"><div class="card-icon">↔</div><h3>DER Communications</h3><p>Exercise native DER interoperability and control interactions through protocol-aware test workflows.</p><span class="subtag">Protocol intelligence</span></div>
+<div class="card"><div class="card-icon">EUT</div><h3>Equipment Under Test</h3><p>Apply controlled conditions and assess the DER response against defined certification criteria.</p><span class="subtag">PV · BESS · DER</span></div>
+</div>
+<div class="solution-flow"><span class="label">Lab orchestration</span><span class="vstep">Grid</span><span class="arrow">+</span><span class="vstep">Source</span><span class="arrow">+</span><span class="vstep">DAQ</span><span class="arrow">+</span><span class="vstep">Communications</span><span class="arrow">→</span><span class="vstep active">LabTest Pro</span><span class="arrow">→</span><span class="vstep">DER EUT</span></div>
+</div>
+</section>
+<section class="section" id="coverage">
+<div class="container">
+<div class="section-head center"><span class="eyebrow">Standards, Coverage &amp; Hardware</span><h2>DER Standards, Interoperability and Hardware Coverage</h2><p>Explore IEEE 1547.1 testing, UL 1741 SB workflows, DER interoperability verification, and the laboratory hardware categories used for automated certification testing.</p></div>
+<div class="tabs" data-tabs="">
+<div aria-label="LabTest Pro coverage" class="tabbar" role="tablist">
+<button aria-controls="cov1" aria-selected="true" class="tab-btn" id="coverage-tab-1" role="tab">IEEE 1547.1</button>
+<button aria-controls="cov2" aria-selected="false" class="tab-btn" id="coverage-tab-2" role="tab">UL 1741 SB</button>
+<button aria-controls="cov3" aria-selected="false" class="tab-btn" id="coverage-tab-3" role="tab">Interoperability</button>
+<button aria-controls="cov4" aria-selected="false" class="tab-btn" id="coverage-tab-4" role="tab">Hardware</button>
+</div>
+<div aria-labelledby="coverage-tab-1" class="tab-panel coverage-panel" id="cov1" role="tabpanel"><div class="how-grid"><div class="tab-copy"><span class="label">IEEE 1547.1</span><h3>Automate key interconnection test procedures</h3><p>Build repeatable workflows across voltage, frequency, ride-through, power, configuration, monitoring, and response validation.</p></div><div class="coverage-columns"><div class="coverage-box"><h4>Test orchestration</h4><div class="checklist"><span>Grid simulator parameter setup</span><span>EUT configuration</span><span>Automated sequence execution</span></div></div><div class="coverage-box"><h4>Evidence</h4><div class="checklist"><span>DAQ measurement capture</span><span>Event and timing logs</span><span>Pass/fail assessment</span></div></div></div></div></div>
+<div aria-labelledby="coverage-tab-2" class="tab-panel coverage-panel" hidden="" id="cov2" role="tabpanel"><div class="how-grid"><div class="tab-copy"><span class="label">UL 1741 SB</span><h3>Execute grid-support validation with repeatable lab control</h3><p>Coordinate equipment, EUT settings, measurements, and evaluation logic for certification-oriented workflows aligned to advanced inverter functions.</p></div><div class="coverage-columns"><div class="coverage-box"><h4>Controlled conditions</h4><div class="checklist"><span>Voltage and frequency profiles</span><span>Source-side conditions</span><span>Function activation and settings</span></div></div><div class="coverage-box"><h4>Assessment</h4><div class="checklist"><span>Measured response</span><span>Timing windows</span><span>Traceable results</span></div></div></div></div></div>
+<div aria-labelledby="coverage-tab-3" class="tab-panel coverage-panel" hidden="" id="cov3" role="tabpanel"><div class="how-grid"><div class="tab-copy"><span class="label">DER Interoperability</span><h3>Validate communications alongside physical performance</h3><p>Exercise utility-facing and lab-facing DER interactions using a shared interoperability foundation, device intelligence, and standards-aware test logic.</p></div><div class="coverage-columns"><div class="coverage-box"><h4>What to verify</h4><div class="checklist"><span>Measurements and telemetry</span><span>Settings and controls</span><span>Command-response behavior</span></div></div><div class="coverage-box"><h4>Where it matters</h4><div class="checklist"><span>Certification labs</span><span>Product QA</span><span>Pre-deployment validation</span></div></div></div></div></div>
+<div aria-labelledby="coverage-tab-4" class="tab-panel coverage-panel" hidden="" id="cov4" role="tabpanel"><div class="how-grid"><div class="tab-copy"><span class="label">Hardware Ecosystem</span><h3>Connect to the equipment already used in DER test labs</h3><p>LabTest Pro supports multiple categories of grid simulators, DC sources, and data-acquisition systems with programmatic laboratory connectivity.</p></div><div class="coverage-box"><h4>Representative equipment categories</h4><div class="hw-chips"><span class="hw-chip">Grid simulators</span><span class="hw-chip">DC simulators</span><span class="hw-chip">Data acquisition</span><span class="hw-chip">Power analyzers</span><span class="hw-chip">HIL / real-time systems</span><span class="hw-chip">DER EUT interfaces</span></div><p class="note">Supported device lists vary by LabTest version and driver availability.</p></div></div></div>
+</div>
+<div class="trust">
+<div class="trust-item"><div class="metric word">IEEE 1547.1</div><strong>Interconnection testing</strong><span>Standards-based test execution and evidence capture.</span></div>
+<div class="trust-item"><div class="metric word">UL 1741 SB</div><strong>Advanced inverter validation</strong><span>Repeatable workflows for grid-support functions.</span></div>
+<div class="trust-item"><div class="metric word">Multi-vendor Lab</div><strong>Hardware orchestration</strong><span>Coordinate major laboratory equipment categories from one environment.</span></div>
+</div><section aria-labelledby="who-uses-labtest-title" class="seo-compact-section" id="who-uses-labtest">
+<div class="seo-section-head">
+<span class="eyebrow">Target Environments</span>
+<h2 id="who-uses-labtest-title">Who Uses LabTest Pro?</h2>
+<p>LabTest Pro is designed for organizations and engineering teams that need repeatable DER conformance, certification, interoperability, and pre-deployment validation.</p>
+</div>
+<div class="seo-audience-grid">
+<div><strong>DER Manufacturers</strong><span>Validate inverter, BESS, wind, and other DER behavior during product development and certification.</span></div>
+<div><strong>Certification Laboratories</strong><span>Standardize laboratory procedures, equipment control, data capture, and test evidence across repeated certification runs.</span></div>
+<div><strong>Power Electronics Engineers</strong><span>Exercise grid-support functions and verify measured device response under controlled laboratory conditions.</span></div>
+<div><strong>Interoperability &amp; QA Teams</strong><span>Verify communications, settings, controls, telemetry, and command-response behavior alongside physical performance.</span></div>
+</div>
+</section><section aria-labelledby="labtest-resources-title" class="seo-compact-section resources" id="labtest-resources">
+<div class="seo-section-head">
+<span class="eyebrow">Technical Resources</span>
+<h2 id="labtest-resources-title">LabTest Pro Documentation and Downloads</h2>
+<p>Use DERSec technical resources to review product documentation, certification-test workflows, laboratory configuration, software downloads, and product data.</p>
+</div>
+<nav aria-label="DERSec LabTest Pro technical resources" class="seo-resource-grid">
+<a href="https://dersec.io/docs/pro/index.html"><strong>LabTest Pro Manual</strong><span>Product setup, features, simulators, automation, and testing documentation.</span></a>
+<a href="https://dersec.io/docs/pro/quickstart_pro/1547.html"><strong>IEEE 1547.1 / UL 1741 SB Test Guide</strong><span>How automated conformance tests coordinate AC, DC, DAQ, and result processing.</span></a>
+<a href="https://dersec.io/docs/pro/detail_pro/simulators.html"><strong>Lab Configuration &amp; Simulator Details</strong><span>Supported laboratory categories, configuration, parameters, and test environment setup.</span></a>
+<a href="https://dersec.io/resources/downloads/"><strong>Software Downloads &amp; Datasheet</strong><span>Current LabTest Pro software, documentation, datasheet, license request, and trial access.</span></a>
+</nav>
+</section><section aria-labelledby="labtest-faq-title" class="seo-compact-section faq" id="labtest-faq">
+<div class="seo-section-head">
+<span class="eyebrow">Frequently Asked Questions</span>
+<h2 id="labtest-faq-title">DERSec LabTest Pro FAQ</h2>
+<p>Concise answers to common questions about DER certification testing, interoperability, laboratory hardware, and automated test execution.</p>
+</div>
+<div class="seo-faq-grid">
+<details open=""><summary>What is DERSec LabTest Pro?</summary><p>LabTest Pro is DER certification and interoperability testing software that coordinates laboratory hardware, standards-based procedures, DER communications, measurement capture, and pass/fail assessment in one automated test environment.</p></details>
+<details><summary>What standards can LabTest Pro help test?</summary><p>LabTest Pro supports certification-oriented workflows for IEEE 1547.1 and UL 1741 SB, including repeatable test execution, measurements, timing evidence, and result assessment.</p></details>
+<details><summary>What laboratory hardware can LabTest Pro coordinate?</summary><p>LabTest Pro can coordinate categories including AC or grid simulators, programmable DC sources, data acquisition systems, power analyzers, real-time or HIL systems, and equipment-under-test interfaces, depending on available drivers and the LabTest version.</p></details>
+<details><summary>Who uses LabTest Pro?</summary><p>Typical users include DER manufacturers, Nationally Recognized Testing Laboratories and other certification labs, power electronics engineers, system test engineers, and interoperability or quality-assurance teams.</p></details>
+<details><summary>How does LabTest Pro automate DER certification testing?</summary><p>The workflow is Configure, Connect, Execute, Measure, and Validate. Test parameters and limits are configured first, laboratory equipment is connected programmatically, standards-based sequences are executed, measurements are captured, and results are assessed for traceable pass/fail evidence.</p></details>
+<details><summary>Does LabTest Pro support DER interoperability testing?</summary><p>Yes. LabTest Pro can validate DER measurements, telemetry, settings, controls, and command-response behavior alongside physical power-system performance using standards-aware test logic and protocol intelligence.</p></details>
+</div>
+</section>
+<div class="cta">
+<div><span class="eyebrow">Request a Demo</span><h2>Automate DER Certification Testing with LabTest Pro</h2><p>Coordinate laboratory hardware, execute standards-based test procedures, capture measurements, and create traceable pass/fail evidence in one automated DER certification environment.</p></div>
+<div class="actions"><span class="btn-wrap"><a aria-label="Request a demo of DERSec LabTest Pro DER certification testing software" class="btn btn-primary" href="https://dersec.io/contact/">Request a LabTest Pro Demo →</a></span><span class="btn-wrap"><a aria-label="Download the DERSec LabTest Pro product brief PDF" class="btn btn-secondary" href="https://dersec.io/wp-content/uploads/2026/03/DERSec_LabTest_Product_Brief_2026-03-02.pdf" rel="noopener" target="_blank">Download LabTest Pro Product Brief</a></span></div>
+</div>
+</div>
+</section>
+</main>
+<footer id="site-footer">
+<div class="footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a aria-label="DERSec home" href="https://dersec.io/">
+<img alt="DERSec" height="40" loading="lazy" src="https://dersec.io/wp-content/uploads/2026/03/Logo.png" width="296"/>
+</a>
+<p>AI-native OT cybersecurity for distributed energy. Protecting data center microgrids, solar+storage, and grid-edge infrastructure from nation-state threats.</p>
+<div aria-label="DERSec social media" class="footer-social">
+<a aria-label="DERSec on LinkedIn" href="https://www.linkedin.com/company/der-security-corp/" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" viewbox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
+</a>
+<a aria-label="DERSec on YouTube" href="https://www.youtube.com/@DERSecurity" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" viewbox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg>
+</a>
+</div>
+</div>
+<div class="footer-col">
+<h6>Platform</h6>
+<div class="footer-links">
+<a href="https://dersec.io/platform/">Overview</a>
+<a href="https://dersec.io/products/#dersec-sentry">DERSec Sentry</a>
+<a href="https://dersec.io/products/#dersync">DERSync Protocol Gateway</a>
+<a href="https://dersec.io/products/#dersim">DERSim Digital Twins</a>
+<a aria-current="page" href="https://dersec.io/products/#labtest-pro">DERSec LabTest Pro</a>
+</div>
+</div>
+<div class="footer-col">
+<h6>Solutions</h6>
+<div class="footer-links">
+<a href="https://dersec.io/solutions/#ai-datacenters">AI Datacenters</a>
+<a href="https://dersec.io/solutions/#distributed-energy">Distributed Energy</a>
+<a href="https://dersec.io/solutions/#emobility">Electric Mobility</a>
+<a href="https://dersec.io/solutions/#vpp-derms">VPP &amp; DERMS</a>
+</div>
+</div>
+<div class="footer-col">
+<h6>Company</h6>
+<div class="footer-links">
+<a href="https://dersec.io/about/">About</a>
+<a href="https://dersec.io/news/">Blog</a>
+<a href="https://dersec.io/careers/">Careers</a>
+<a href="https://dersec.io/contact/">Contact</a>
+</div>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<div class="footer-bottom-inner">
+<p class="copyright">©2026 DER Security Corp. All Rights Reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+document.querySelectorAll('[data-tabs]').forEach(widget=>{
+  const tabs=[...widget.querySelectorAll('[role="tab"]')], panels=[...widget.querySelectorAll('[role="tabpanel"]')];
+  function activate(tab){
+    tabs.forEach(t=>{const on=t===tab;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1});
+    panels.forEach(p=>p.hidden=p.id!==tab.getAttribute('aria-controls'));
+  }
+  tabs.forEach((tab,i)=>{
+    tab.tabIndex=tab.getAttribute('aria-selected')==='true'?0:-1;
+    tab.addEventListener('click',()=>activate(tab));
+    tab.addEventListener('keydown',e=>{
+      if(!['ArrowRight','ArrowLeft','Home','End'].includes(e.key))return;
+      e.preventDefault();let n=i;
+      if(e.key==='ArrowRight')n=(i+1)%tabs.length;
+      if(e.key==='ArrowLeft')n=(i-1+tabs.length)%tabs.length;
+      if(e.key==='Home')n=0;
+      if(e.key==='End')n=tabs.length-1;
+      tabs[n].focus();activate(tabs[n]);
+    });
+  });
+});
+</script>
+<script>
+(() => {
+  const toggle = document.querySelector('.ds-mobile-toggle');
+  const menu = document.querySelector('.ds-mobile-menu');
+  if (!toggle || !menu) return;
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  });
+})();
+</script>
 </body>
 </html>
